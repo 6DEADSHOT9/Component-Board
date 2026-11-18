@@ -1,4 +1,5 @@
 {
+  "wave": "pilot-01",
   "stats": {
     "records": 143254,
     "gate_passed": 93663
@@ -75,7 +76,7 @@
       ],
       "items": [
         "@assistant-ui/elements-command-palette",
-        "@diceui/command-stack",
+        "@assistant-ui/elements-conversation-search",
         "@kibo-ui/combobox"
       ]
     },
@@ -91,6 +92,6 @@
       ]
     }
   },
-  "method": "Source-reviewed pilot pool (explicit addresses); 0.75 relevance - 0.25 max similarity; similarity = tags .35, dependencies .25, registry .20, interaction pattern .20; max 2 per registry per need. No popularity scores. Scores are static-source evidence, not verified runtime quality.",
-  "catalog_sha256": "see metadata hashes per candidate"
+  "method": "Source-reviewed pilot pool (explicit addresses); 0.75 relevance - 0.25 max similarity; similarity = tags .25, dependencies .25, registry .20, interaction pattern .15, layout .15; max 2 per registry per need. No popularity scores. Scores are static-source evidence, not verified runtime quality.",
+  "catalog_sha256": "8ba73c8a7c69f41a4a73c1bcbf845d28e5797b2a7b10e7d5b88938661d82d8b2"
 }

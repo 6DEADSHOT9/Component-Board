@@ -2,8 +2,9 @@ const $ = id => document.getElementById(id);
 let components = [], me = {}, view = 'home', batch = 0, batchIds = [], skipped = new Set(JSON.parse(localStorage.getItem('skipped') || '[]')), onlySkipped = false;
 const message = (text = '', error = false) => { $('message').textContent = text; $('message').className = error ? 'error' : ''; };
 const escape = text => String(text ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-async function api(path, data) {
+async function api(path, data, attempt = 0) {
   const response = await fetch(path, {method: data === undefined ? 'GET' : 'POST', headers: data === undefined ? {} : {'Content-Type': 'application/json'}, body: data === undefined ? undefined : JSON.stringify(data), signal: AbortSignal.timeout(90000)});
+  if (response.status === 503 && data === undefined && attempt < 3) { message('The free server is waking up. Your saved reviews are retained; reconnecting…'); await new Promise(resolve => setTimeout(resolve, 4000)); return api(path, data, attempt + 1); }
   let value;
   try { value = await response.json(); } catch { throw Error('The free server is waking up. Wait 30–60 seconds, then try again.'); }
   if (!response.ok) { const error = Error(value.error || 'Could not save. Try again.'); error.transient = response.status === 503; throw error; }
@@ -12,7 +13,7 @@ async function api(path, data) {
 function show(id) { for (const name of ['access','onboarding','board','owner-access','paused']) $(name).hidden = name !== id; }
 async function load() {
   me = await api('/api/me');
-  if (!me.person && !me.owner) { show('onboarding'); return; }
+  if (!me.person && (!me.owner || view === 'review')) { show('onboarding'); return; }
   const data = await api('/api/components'); components = data.components;
   $('participation').textContent = `${data.participants} ${data.participants === 1 ? 'teammate' : 'teammates'} participating`;
   for (const [id, values] of [['need', [...new Set(components.map(c => c.need))]], ['registry', [...new Set(components.map(c => c.registry))]]]) {
@@ -53,7 +54,7 @@ function card(c) {
  const id = escape(c.id), own = c.vote;
  const pictures = c.previews || {};
  return `<article class="card" data-id="${id}"><header><div><h2>${escape(c.name)}</h2><small>${escape(c.need)}</small></div><span class="tag">${escape(c.status)}</span></header>
- ${pictures.light ? `<div class="preview"><img src="${escape(pictures.light)}" alt="${escape(c.name)} in its upstream light appearance" loading="lazy" width="960" height="600"></div><div class="preview-tabs"><button data-preview="light">Light</button><button data-preview="dark">Dark</button>${pictures.interaction ? '<button data-preview="interaction">Interaction</button>' : ''}</div>` : '<p class="muted">Preview pending isolation run.</p>'}
+ ${pictures.light ? `<div class="preview"><a class="preview-full" target="_blank" rel="noreferrer" href="${escape(pictures.light)}"><img src="${escape(pictures.light)}" alt="${escape(c.name)} in its upstream light appearance" loading="lazy" width="960" height="600"></a></div><div class="preview-tabs"><button data-preview="light">Light</button><button data-preview="dark">Dark</button>${pictures.interaction ? '<button data-preview="interaction">Interaction</button>' : ''}</div>` : '<p class="muted">Preview pending isolation run.</p>'}
  ${pictures.clip ? `<details><summary>Watch interaction</summary><div class="preview"><video src="${escape(pictures.clip)}" controls preload="none" playsinline aria-label="Upstream component interaction"></video></div></details>` : ''}
  <small>Upstream look; will be ported to Implicity’s design tokens.</small>
  <dl class="facts"><dt>Registry</dt><dd>${escape(c.registry)}</dd><dt>Licence</dt><dd><a href="${escape(c.license.url)}" target="_blank" rel="noreferrer">${escape(c.license.name)} · ${c.license.verified ? 'verified' : 'unverified'}</a></dd><dt>Dependencies</dt><dd>${escape(c.dependencies.join(', ') || 'None declared')}</dd><dt>Added size</dt><dd>${escape(c.addedSize || 'Not measured yet; adoption requires a port measurement')}</dd><dt>Porting effort</dt><dd>${escape(c.portingEffort)}</dd></dl>
@@ -61,9 +62,9 @@ function card(c) {
  <details><summary>Why shortlisted</summary><p class="port">${escape(c.why)}</p><p class="port">Revision ${escape(c.sourceRevision)} · rubric ${escape(JSON.stringify(c.rubric))}</p><a href="${escape(c.addressUrl)}" target="_blank" rel="noreferrer">Registry item source</a></details>
  ${view !== 'home' && me.person ? `<form class="vote-form"><label for="reason-${id}">One-line reason <span class="muted">(optional)</span></label><input id="reason-${id}" name="reason" maxlength="240" value="${escape(own?.reason || '')}"><div class="vote-buttons">${['yes','no','abstain'].map(choice => `<button type="submit" value="${choice}" aria-pressed="${own?.choice === choice}">${choice[0].toUpperCase() + choice.slice(1)}</button>`).join('')}<button type="button" data-skip>Skip</button></div></form>` : ''}
  <p class="results">${own ? `Your vote: ${escape(own.choice)} · ` : 'Not reviewed by you · '}${c.participation} participated${c.totals ? `<br>Yes ${c.totals.yes} · No ${c.totals.no} · Abstain ${c.totals.abstain}` : '<br>Totals appear after your vote.'}</p>
- ${view === 'owner' ? `<label>Status<select data-status>${['review','approved','ported','in the app'].map(s => `<option${c.status === s ? ' selected' : ''}>${s}</option>`).join('')}</select></label>` : ''}</article>`;
+ ${view === 'owner' ? `<details><summary>Individual reviews (${c.participation})</summary>${(c.reviews || []).map(r => `<p class="port"><strong>${escape(r.name)} · ${escape(r.choice)}</strong><br>${escape(r.reason || 'No reason added')}</p>`).join('') || '<p class="port">No reviews yet.</p>'}</details><label>Status<select data-status>${['review','approved','ported','in the app'].map(s => `<option${c.status === s ? ' selected' : ''}>${s}</option>`).join('')}</select></label>` : ''}</article>`;
 }
-function handle(fn) { return async event => { event.preventDefault(); const submitter = event.submitter || (event.currentTarget instanceof HTMLButtonElement ? event.currentTarget : null); const label = submitter?.textContent; if(submitter) { submitter.disabled = true; submitter.textContent = 'Saving…'; } try { message(); await fn(event); } catch (error) { message(error.message, true); } finally { if(submitter) { submitter.disabled = false; submitter.textContent = label; } } }; }
+function handle(fn) { return async event => { event.preventDefault(); const submitter = event.submitter || (event.currentTarget instanceof HTMLButtonElement ? event.currentTarget : null); const label = submitter?.textContent; if(submitter) { submitter.disabled = true; submitter.textContent = 'Saving…'; } try { message(); event.target.querySelector?.('.form-error')?.remove(); await fn(event); } catch (error) { message(error.message, true); if(event.target instanceof HTMLFormElement) { const note = document.createElement('p'); note.className = 'form-error danger'; note.setAttribute('role','alert'); note.textContent = error.message; event.target.append(note); } } finally { if(submitter) { submitter.disabled = false; submitter.textContent = label; } } }; }
 $('access-form').onsubmit = handle(async () => { await api('/api/access', {code:$('access-code').value}); await load(); });
 $('owner-form').onsubmit = handle(async () => { await api('/api/access', {code:$('owner-code').value, kind:'owner'}); view = 'owner'; await load(); });
 $('onboard-form').onsubmit = handle(async () => { await api('/api/onboard', {name:$('name').value, email:$('email').value}); view = 'review'; await load(); });
@@ -76,15 +77,15 @@ $('cards').addEventListener('submit', handle(async event => {
  const c = components.find(c => c.id === event.target.closest('[data-id]').dataset.id);
  await api('/api/vote', {component:c.id, version:c.version, choice:event.submitter.value, reason:event.target.elements.reason.value});
  skipped.delete(c.id); localStorage.setItem('skipped', JSON.stringify([...skipped]));
- await load(); document.querySelector(`[data-id="${c.id}"] button[value="${c.vote?.choice || event.submitter.value}"]`)?.focus({preventScroll:true}); message('Vote saved. You can change it at any time.');
+ await load(); document.querySelector(`[data-id="${c.id}"] button[value="${event.submitter.value}"]`)?.focus({preventScroll:true}); message('Vote saved. You can change it at any time.');
 }));
 $('cards').addEventListener('click', event => {
  const article = event.target.closest('[data-id]'); if(!article) return;
  const c = components.find(c => c.id === article.dataset.id);
  if(event.target.matches('[data-skip]')) { skipped.add(c.id); localStorage.setItem('skipped', JSON.stringify([...skipped])); article.hidden = true; message('Skipped for now. Use Review skipped to return to it.'); }
- if(event.target.dataset.preview) { const state = event.target.dataset.preview; const img = article.querySelector('.preview img'); img.src = c.previews[state]; img.alt = `${c.name} upstream ${state} appearance`; }
+ if(event.target.dataset.preview) { const state = event.target.dataset.preview; const img = article.querySelector('.preview img'); img.src = c.previews[state]; article.querySelector('.preview-full').href = c.previews[state]; img.alt = `${c.name} upstream ${state} appearance`; }
 });
-$('cards').addEventListener('change', handle(async event => { if(event.target.matches('[data-status]')) { await api('/api/status', {component:event.target.closest('[data-id]').dataset.id, status:event.target.value}); await load(); message('Status saved.'); } }));
+$('cards').addEventListener('change', handle(async event => { if(event.target.matches('[data-status]')) { await api('/api/status', {component:event.target.closest('[data-id]').dataset.id, version:components.find(c => c.id === event.target.closest('[data-id]').dataset.id).version, status:event.target.value}); await load(); message('Status saved.'); } }));
 $('import').onclick = handle(async () => { const file = $('import-file').files[0]; if(!file) throw Error('Choose a full JSON export first.'); await api('/api/import', JSON.parse(await file.text())); await load(); message('Data restored.'); });
 $('delete').onclick = handle(async () => { await api('/api/delete-all', {confirm:$('confirm').value}); location.reload(); });
 (async () => {

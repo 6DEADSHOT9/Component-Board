@@ -2,7 +2,6 @@
 import argparse
 from datetime import datetime,timedelta,timezone
 import json
-import os
 from pathlib import Path
 import urllib.request
 import urllib.error

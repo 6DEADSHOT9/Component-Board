@@ -1,0 +1,9 @@
+[
+  {
+    "address": "@diceui/command-stack",
+    "need": "Command palette and search",
+    "reason": "Registry installation under the pinned CLI leaves an unresolved @/components/icon-placeholder import. Excluded from this pilot on packaging and porting effort, rather than replacing upstream behaviour with a homemade stand-in; replaced by assistant-ui conversation search.",
+    "evidence": "data/evidence/diceui-command-stack.json",
+    "licence": "MIT verified, so the rejection is packaging quality rather than permission."
+  }
+]

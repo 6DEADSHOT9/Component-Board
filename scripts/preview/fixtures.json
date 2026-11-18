@@ -63,7 +63,10 @@
     "jsx": "<C.CodeBlock data={[{language:\"javascript\",filename:\"review.js\",code:\"const approved = items.filter(item => item.approved);\"}]} defaultValue=\"javascript\"><C.CodeBlockHeader><C.CodeBlockFilename value=\"javascript\">review.js</C.CodeBlockFilename><C.CodeBlockCopyButton/></C.CodeBlockHeader><C.CodeBlockBody>{item=><C.CodeBlockItem key={item.language} value={item.language}><C.CodeBlockContent language={item.language}>{item.code}</C.CodeBlockContent></C.CodeBlockItem>}</C.CodeBlockBody></C.CodeBlock>",
     "action": {
       "selector": "button"
-    }
+    },
+    "packages": [
+      "react-icons@5.4.0"
+    ]
   },
   "assistant-ui-elements-data-table": {
     "symbol": "DataTable",
@@ -81,7 +84,10 @@
     "jsx": "<C.TableProvider columns={[{accessorKey:\"name\",header:({column})=><C.TableColumnHeader column={column} title=\"Component\"/>},{accessorKey:\"status\",header:\"Status\"}]} data={[{name:\"Prompt input\",status:\"Review\"},{name:\"Code block\",status:\"Approved\"},{name:\"Search\",status:\"Review\"}]}><C.TableHeader>{({headerGroup:hg})=><C.TableHeaderGroup headerGroup={hg} key={hg.id}>{({header})=><C.TableHead header={header} key={header.id}/>}</C.TableHeaderGroup>}</C.TableHeader><C.TableBody>{({row})=><C.TableRow row={row} key={row.id}>{({cell})=><C.TableCell cell={cell} key={cell.id}/>}</C.TableRow>}</C.TableBody></C.TableProvider>",
     "action": {
       "selector": "thead button"
-    }
+    },
+    "packages": [
+      "@tanstack/react-table@8.21.3"
+    ]
   },
   "assistant-ui-elements-chart": {
     "symbol": "Chart",
@@ -93,7 +99,11 @@
   },
   "kibo-ui-gantt": {
     "symbol": "GanttProvider",
-    "jsx": "<C.GanttProvider range=\"monthly\" zoom={100}><C.GanttSidebar><C.GanttSidebarGroup name=\"Pilot\"><C.GanttSidebarItem feature={{id:\"1\",name:\"Review components\",startAt:new Date(),endAt:new Date(Date.now()+7*86400000),status:{id:\"1\",name:\"In progress\",color:\"#3b82f6\"}}}/></C.GanttSidebarGroup></C.GanttSidebar><C.GanttTimeline><C.GanttHeader/><C.GanttFeatureList><C.GanttFeatureListGroup><C.GanttFeatureItem id=\"1\" name=\"Review components\" startAt={new Date()} endAt={new Date(Date.now()+7*86400000)} status={{id:\"1\",name:\"In progress\",color:\"#3b82f6\"}}/></C.GanttFeatureListGroup></C.GanttFeatureList><C.GanttToday/></C.GanttTimeline></C.GanttProvider>"
+    "jsx": "<C.GanttProvider range=\"monthly\" zoom={100}><C.GanttSidebar><C.GanttSidebarGroup name=\"Pilot\"><C.GanttSidebarItem feature={{id:\"1\",name:\"Review components\",startAt:new Date(),endAt:new Date(Date.now()+7*86400000),status:{id:\"1\",name:\"In progress\",color:\"#3b82f6\"}}}/></C.GanttSidebarGroup></C.GanttSidebar><C.GanttTimeline><C.GanttHeader/><C.GanttFeatureList><C.GanttFeatureListGroup><C.GanttFeatureItem onMove={()=>{}} id=\"1\" name=\"Review components\" startAt={new Date()} endAt={new Date(Date.now()+7*86400000)} status={{id:\"1\",name:\"In progress\",color:\"#3b82f6\"}}/></C.GanttFeatureListGroup></C.GanttFeatureList><C.GanttToday/></C.GanttTimeline></C.GanttProvider>",
+    "action": {
+      "selector": "[aria-roledescription=\"draggable\"]",
+      "drag": true
+    }
   },
   "ai-elements-file-tree": {
     "symbol": "FileTree",
@@ -108,7 +118,11 @@
   },
   "kibo-ui-dropzone": {
     "symbol": "Dropzone",
-    "jsx": "<C.Dropzone maxFiles={3}><C.DropzoneEmptyState/><C.DropzoneContent/></C.Dropzone>"
+    "jsx": "<C.Dropzone maxFiles={3} src={files} onDrop={accepted=>setFiles(accepted)}><C.DropzoneEmptyState/><C.DropzoneContent/></C.Dropzone>",
+    "action": {
+      "selector": "input[type=file]",
+      "upload": true
+    }
   },
   "assistant-ui-elements-command-palette": {
     "symbol": "CommandPalette",
@@ -118,27 +132,21 @@
       "fill": "review"
     }
   },
-  "diceui-command-stack": {
-    "symbol": "CommandStack",
-    "jsx": "<C.CommandStack><C.CommandStackInput placeholder=\"Search commands\u2026\"/><C.CommandStackList><C.CommandStackPage value=\"root\"><C.CommandStackGroup heading=\"Navigate\"><C.CommandStackItem value=\"library\">Component library</C.CommandStackItem><C.CommandStackItem value=\"review\">Review pilot</C.CommandStackItem></C.CommandStackGroup></C.CommandStackPage></C.CommandStackList></C.CommandStack>",
-    "action": {
-      "selector": "input",
-      "fill": "review"
-    }
-  },
   "kibo-ui-combobox": {
     "symbol": "Combobox",
-    "jsx": "<C.Combobox data={[{label:\"Prompt input\",value:\"prompt\"},{label:\"Data table\",value:\"table\"},{label:\"Code block\",value:\"code\"}]} type=\"component\"><C.ComboboxTrigger/><C.ComboboxContent><C.ComboboxInput/><C.ComboboxList><C.ComboboxEmpty/><C.ComboboxGroup>{item=><C.ComboboxItem key={item.value} value={item.value}>{item.label}</C.ComboboxItem>}</C.ComboboxGroup></C.ComboboxList></C.ComboboxContent></C.Combobox>",
+    "jsx": "<C.Combobox data={[{label:\"Prompt input\",value:\"prompt\"},{label:\"Data table\",value:\"table\"},{label:\"Code block\",value:\"code\"}]} type=\"component\"><C.ComboboxTrigger/><C.ComboboxContent><C.ComboboxInput/><C.ComboboxList><C.ComboboxEmpty/><C.ComboboxGroup>{[{label:\"Prompt input\",value:\"prompt\"},{label:\"Data table\",value:\"table\"},{label:\"Code block\",value:\"code\"}].map(item=><C.ComboboxItem key={item.value} value={item.value}>{item.label}</C.ComboboxItem>)}</C.ComboboxGroup></C.ComboboxList></C.ComboboxContent></C.Combobox>",
     "action": {
       "selector": "button"
     }
   },
   "coss-toast": {
     "symbol": "ToastProvider",
-    "jsx": "<C.ToastProvider><button onClick={()=>C.toastManager.add({title:\"Review saved\",description:\"Your vote can be edited at any time.\"})} className=\"rounded-md border px-4 py-2\">Save review</button></C.ToastProvider>",
+    "jsx": "<C.ToastProvider><button onClick={()=>C.toastManager.add({title:\"Review saved\",description:\"Your vote can be edited at any time.\",type:\"success\",timeout:0,actionProps:{children:\"Undo\"}})} className=\"rounded-md border px-4 py-2\">Save review</button></C.ToastProvider>",
     "action": {
-      "selector": "button"
-    }
+      "selector": "[data-slot=\"toast-action\"]"
+    },
+    "setupClick": "button",
+    "captureSelector": "[data-slot=\"toast-viewport\"] > div"
   },
   "assistant-ui-elements-error-state": {
     "symbol": "ErrorState",
@@ -151,7 +159,14 @@
     "symbol": "Banner",
     "jsx": "<C.Banner inset><C.BannerTitle>The pilot is ready for your review.</C.BannerTitle><C.BannerAction onClick={()=>setOpen(true)}>Review components</C.BannerAction><C.BannerClose/></C.Banner>",
     "action": {
-      "selector": "button"
+      "selector": "button:last-child"
+    }
+  },
+  "assistant-ui-elements-conversation-search": {
+    "symbol": "ConversationSearch",
+    "jsx": "<C.ConversationSearch query={value || \"tokens\"} hits={[{id:\"a\",before:\"Use the shared \",match:\"tokens\",after:\" for every surface.\",position:0.25},{id:\"b\",before:\"Port upstream colours to design \",match:\"tokens\",after:\" before adoption.\",position:0.75}]} activeIndex={open ? 1 : 0} onQueryChange={setValue} onStep={()=>setOpen(!open)}/>",
+    "action": {
+      "selector": "button[aria-label=\"Next match\"]"
     }
   }
 }

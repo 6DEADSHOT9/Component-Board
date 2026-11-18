@@ -1,12 +1,11 @@
 import csv
-import hashlib
 import hmac
 import io
 import json
 import os
 import secrets
 import time
-from datetime import date, timedelta
+from datetime import date, datetime, timedelta
 from functools import wraps
 from pathlib import Path
 
@@ -15,9 +14,11 @@ from psycopg.rows import dict_row
 from flask import Flask, abort, jsonify, request, send_from_directory, session, render_template
 
 app = Flask(__name__)
+# shortcut: JSON imports are capped at 4 MB; stream imports if review exports outgrow a small team.
 app.config.update(SECRET_KEY=os.environ['SESSION_SECRET'], MAX_CONTENT_LENGTH=4 * 1024 * 1024,
                   SESSION_COOKIE_HTTPONLY=True, SESSION_COOKIE_SAMESITE='Strict',
-                  SESSION_COOKIE_SECURE=os.getenv('COOKIE_SECURE', 'true') == 'true')
+                  SESSION_COOKIE_SECURE=os.getenv('COOKIE_SECURE', 'true') == 'true',
+                  PERMANENT_SESSION_LIFETIME=timedelta(days=30))
 CATALOG = json.loads(Path('data/candidates.json').read_text())
 BY_ID = {c['id']: c for c in CATALOG}
 STATUSES = ('review', 'approved', 'ported', 'in the app')
@@ -36,7 +37,8 @@ def initialize():
           component TEXT NOT NULL, version TEXT NOT NULL, choice TEXT NOT NULL CHECK(choice IN ('yes','no','abstain')),
           reason TEXT NOT NULL DEFAULT '', updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
           PRIMARY KEY(person,component,version));
-          CREATE TABLE IF NOT EXISTS statuses (component TEXT PRIMARY KEY, status TEXT NOT NULL);
+          CREATE TABLE IF NOT EXISTS statuses (component TEXT PRIMARY KEY, status TEXT NOT NULL, version TEXT);
+          ALTER TABLE statuses ADD COLUMN IF NOT EXISTS version TEXT;
           CREATE TABLE IF NOT EXISTS settings (key TEXT PRIMARY KEY, value TEXT NOT NULL);''')
         con.execute("INSERT INTO settings VALUES ('generation', %s) ON CONFLICT DO NOTHING", (secrets.token_hex(16),))
 
@@ -49,6 +51,8 @@ def authenticated(owner=False):
         @wraps(fn)
         def wrapped(*args, **kwargs):
             with db() as con:
+                # Serialize resets with participant writes so deleted identities cannot race back in.
+                con.execute('SELECT pg_advisory_xact_lock(7849021)')
                 generation = con.execute("SELECT value FROM settings WHERE key='generation'").fetchone()['value']
                 if session.get('generation') != generation:
                     abort(401, 'Open your invite link again.')
@@ -57,7 +61,7 @@ def authenticated(owner=False):
                         abort(403, 'Owner access required.')
                 elif not session.get('invite'):
                     abort(401, 'Open your invite link first.')
-            return fn(*args, **kwargs)
+                return fn(*args, **kwargs)
         return wrapped
     return decorate
 
@@ -136,6 +140,7 @@ def access():
     person = session.get('person') if session.get('generation') == generation else None
     session.clear()
     session.update(invite=True, owner=owner, generation=generation)
+    session.permanent = True
     if person: session['person'] = person
     return {'ok': True}
 
@@ -179,15 +184,18 @@ def onboard():
 def components():
     with db() as con:
         votes = con.execute('SELECT * FROM votes').fetchall()
-        statuses = {r['component']: r['status'] for r in con.execute('SELECT * FROM statuses')}
+        statuses = {(r['component'],r['version']): r['status'] for r in con.execute('SELECT * FROM statuses')}
         participants = con.execute('SELECT count(*) AS n FROM people').fetchone()['n']
+        names = {p['id']:p['name'] for p in con.execute('SELECT id,name FROM people')} if session.get('owner') else {}
     result = []
     for c in CATALOG:
         current = [v for v in votes if v['component'] == c['id'] and v['version'] == c['version']]
         own = next((v for v in current if v['person'] == session.get('person')), None)
-        item = dict(c, status=statuses.get(c['id'], 'review'), vote=own and {'choice': own['choice'], 'reason': own['reason']}, participation=len(current))
+        item = dict(c, status=statuses.get((c['id'],c['version']), 'review'), vote=own and {'choice': own['choice'], 'reason': own['reason']}, participation=len(current))
         if own or session.get('owner'):
             item['totals'] = {choice: sum(v['choice'] == choice for v in current) for choice in ('yes', 'no', 'abstain')}
+        if session.get('owner'):
+            item['reviews'] = [{'name': names.get(v['person'], 'Deleted participant'), 'choice': v['choice'], 'reason': v['reason']} for v in current]
         result.append(item)
     return {'components': result, 'participants': participants}
 
@@ -198,6 +206,8 @@ def vote():
     if not session.get('person'):
         abort(403, 'Enter your name and email first.')
     p = request.get_json()
+    if not isinstance(p.get('component'), str):
+        abort(400, 'Choose a listed component.')
     c = BY_ID.get(p.get('component'))
     if not c or p.get('version') != c['version']:
         abort(409, 'Component version changed. Refresh before voting.')
@@ -217,18 +227,21 @@ def vote():
 @authenticated(owner=True)
 def status():
     p = request.get_json()
-    if p.get('component') not in BY_ID or p.get('status') not in STATUSES:
+    if not isinstance(p.get('component'), str) or p.get('component') not in BY_ID or p.get('status') not in STATUSES:
         abort(400, 'Choose a listed component and status.')
     c = BY_ID[p['component']]
+    if p.get('version') != c['version']:
+        abort(409, 'Component version changed. Refresh before approving.')
     if p['status'] != 'review' and c['license']['verified'] is not True:
         abort(400, 'Verify the source licence before approval.')
     with db() as con:
-        con.execute('INSERT INTO statuses VALUES (%s,%s) ON CONFLICT(component) DO UPDATE SET status=excluded.status', (c['id'], p['status']))
+        con.execute('INSERT INTO statuses(component,status,version) VALUES (%s,%s,%s) ON CONFLICT(component) DO UPDATE SET status=excluded.status,version=excluded.version', (c['id'], p['status'], c['version']))
     return {'ok': True}
 
 
 def snapshot():
     with db() as con:
+        con.execute('SET TRANSACTION ISOLATION LEVEL REPEATABLE READ READ ONLY')
         return {'format': 1, 'generation': con.execute("SELECT value FROM settings WHERE key='generation'").fetchone()['value'], 'people': con.execute('SELECT * FROM people ORDER BY id').fetchall(),
           'votes': con.execute('SELECT * FROM votes ORDER BY person,component,version').fetchall(),
           'statuses': con.execute('SELECT * FROM statuses ORDER BY component').fetchall()}
@@ -266,20 +279,27 @@ def restore():
         abort(400, 'Use a full JSON export from this board.')
     people, votes, statuses = data['people'], data['votes'], data['statuses']
     try:
-        assert isinstance(data.get('generation'), str) and len(data['generation']) == 32
-        assert len(people) <= 10000 and len(votes) <= 100000
+        if not (isinstance(data.get('generation'), str) and len(data['generation']) == 32): raise ValueError()
+        if not (len(people) <= 10000 and len(votes) <= 100000): raise ValueError()
         ids = {p['id'] for p in people}
-        assert len(ids) == len(people)
+        if not (len(ids) == len(people)): raise ValueError()
+        if not (len({p['email'].lower() for p in people}) == len(people)): raise ValueError()
+        if not (len({(v['person'],v['component'],v['version']) for v in votes}) == len(votes)): raise ValueError()
+        if not (len({s['component'] for s in statuses}) == len(statuses)): raise ValueError()
         for p in people:
-            assert all(isinstance(p[k],str) and 0 < len(p[k]) <= limit for k,limit in [('id',100),('name',80),('email',254)])
+            if not (all(isinstance(p[k],str) and 0 < len(p[k]) <= limit for k,limit in [('id',100),('name',80),('email',254)])): raise ValueError()
+            if not ('@' in p['email'] and '\n' not in p['email']): raise ValueError()
         for v in votes:
-            assert v['person'] in ids and v['component'] in BY_ID and v['choice'] in ('yes','no','abstain')
-            assert isinstance(v['version'],str) and len(v['version']) <= 128
-            assert isinstance(v['reason'],str) and len(v['reason']) <= 240 and '\n' not in v['reason']
+            if not (isinstance(v['updated_at'],str) and len(v['updated_at']) <= 64): raise ValueError()
+            if not (datetime.fromisoformat(v['updated_at'].replace('Z','+00:00')).tzinfo is not None): raise ValueError()
+            if not (v['person'] in ids and v['component'] in BY_ID and v['choice'] in ('yes','no','abstain')): raise ValueError()
+            if not (isinstance(v['version'],str) and len(v['version']) <= 128): raise ValueError()
+            if not (isinstance(v['reason'],str) and len(v['reason']) <= 240 and '\n' not in v['reason']): raise ValueError()
         for s in statuses:
-            assert s['component'] in BY_ID and s['status'] in STATUSES
-            assert s['status'] == 'review' or BY_ID[s['component']]['license']['verified']
-    except (AssertionError,KeyError,TypeError):
+            if not (s['component'] in BY_ID and s['status'] in STATUSES): raise ValueError()
+            if not (s.get('version') is None or (isinstance(s['version'],str) and len(s['version']) <= 128)): raise ValueError()
+            if not (s['status'] == 'review' or BY_ID[s['component']]['license']['verified']): raise ValueError()
+    except (AssertionError,KeyError,TypeError,ValueError,AttributeError):
         abort(400, 'The export has invalid or unknown records. Nothing was imported.')
     with db() as con:
         if con.execute('SELECT count(*) AS n FROM people').fetchone()['n'] or con.execute('SELECT count(*) AS n FROM statuses').fetchone()['n']:
@@ -289,7 +309,7 @@ def restore():
         for v in votes:
             con.execute('INSERT INTO votes(person,component,version,choice,reason,updated_at) VALUES (%s,%s,%s,%s,%s,%s)', tuple(v[k] for k in ('person','component','version','choice','reason','updated_at')))
         for s in statuses:
-            con.execute('INSERT INTO statuses VALUES (%s,%s)', (s['component'],s['status']))
+            con.execute('INSERT INTO statuses(component,status,version) VALUES (%s,%s,%s)', (s['component'],s['status'],s.get('version')))
         con.execute("UPDATE settings SET value=%s WHERE key='generation'", (data['generation'],))
     session['generation'] = data['generation']
     return {'ok':True}

@@ -8,5 +8,5 @@ function files(dir) {return fs.readdirSync(dir,{withFileTypes:true}).flatMap(e=>
 const candidates=files('src').filter(p=>/\.(t|j)sx?$/.test(p));
 const target=candidates.find(p=>new RegExp(`(?:function|const|class) ${fixture.symbol}\\b`).test(fs.readFileSync(p,'utf8')));
 if(!target) throw Error('Cannot locate '+fixture.symbol+' in '+candidates.join(','));
-fs.writeFileSync('src/main.tsx',`import React,{useState} from 'react';import{createRoot}from'react-dom/client';import * as C from './${target.slice(4).replace(/\.tsx?$/,'')}';import './style.css';function Demo(){const [open,setOpen]=useState(false);const [value,setValue]=useState('');const [active,setActive]=useState('open');return <div id="fixture">${fixture.jsx}</div>}createRoot(document.getElementById('root')!).render(<Demo/>);`);
+fs.writeFileSync('src/main.tsx',`import React,{useState} from 'react';import{createRoot}from'react-dom/client';import * as C from './${target.slice(4).replace(/\.tsx?$/,'')}';import './style.css';function Demo(){const [open,setOpen]=useState(false);const [value,setValue]=useState('');const [active,setActive]=useState('open');const [files,setFiles]=useState<File[]>([]);return <div id="fixture">${fixture.jsx}</div>}createRoot(document.getElementById('root')!).render(<Demo/>);`);
 fs.writeFileSync('/output/installed.json',JSON.stringify({target,slug,files:candidates},null,2));

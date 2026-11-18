@@ -1,0 +1,6 @@
+{
+  "previewGzipBytes": 74650,
+  "baselineGzipBytes": 65826,
+  "incrementalGzipBytes": 8824,
+  "method": "Production Vite JS+CSS gzip sum, minus empty React+theme harness; preview fixture overhead included; actual Implicity port unmeasured"
+}

@@ -1,11 +1,9 @@
 """Install and render each untrusted registry item only inside resource-limited Docker."""
 import argparse
 import json
-import os
 from pathlib import Path
 import shutil
 import subprocess
-import time
 ROOT=Path(__file__).resolve().parents[1]
 
 def run(args,timeout=300):
@@ -19,6 +17,9 @@ def preview(c):
         run(['docker','exec',name,'sh','-c','cp style-base.css src/style.css'])
         run(['docker','cp',str(ROOT/'data/evidence'/(c['id']+'.json')),name+':/preview/item.json'])
         log.append(run(['docker','exec',name,'npx','shadcn','add','/preview/item.json','--yes','--overwrite'],timeout=360))
+        fixture=json.loads((ROOT/'scripts/preview/fixtures.json').read_text())[c['id']]
+        if fixture.get('packages'):
+            log.append(run(['docker','exec',name,'npm','install','--ignore-scripts','--no-audit','--no-fund',*fixture['packages']],timeout=120))
         # The network is physically disconnected before executing source or starting the browser.
         run(['docker','network','disconnect','bridge',name])
         log.append(run(['docker','exec',name,'node','prepare.mjs',c['id']],timeout=30))
@@ -57,7 +58,9 @@ def main():
     path=ROOT/'data/candidates.json';candidates=json.loads(path.read_text());failed=[]
     for c in candidates:
         if args.id and c['id']!=args.id:continue
-        if c['previews'] and (ROOT/'data/evidence'/(c['id']+'-size.json')).exists() and not args.id:continue
+        if c['previews'] and (ROOT/'data/evidence'/(c['id']+'-size.json')).exists() and not args.id:
+            fixture=json.loads((ROOT/'scripts/preview/fixtures.json').read_text())[c['id']]
+            if not fixture.get('action') or c['previews'].get('clip'):continue
         if not preview(c):failed.append(c['id'])
         path.write_text(json.dumps(candidates,indent=2))
     if failed:raise SystemExit('Preview failures: '+', '.join(failed))
