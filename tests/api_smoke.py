@@ -41,6 +41,10 @@ v={'component':c['id'],'version':c['version'],'choice':'yes','reason':'Clear int
 call(a,'/api/vote',v)
 call(a,'/api/vote',dict(v,choice='no',reason='Too much detail'))
 rows=call(a,'/api/components')['components'];assert rows[0]['totals']=={'yes':0,'no':1,'abstain':0};assert rows[0]['participation']==1
+call(a,'/api/vote/undo',dict(v,choice='yes',reason='Clear interaction'));assert call(a,'/api/components')['components'][0]['vote']['choice']=='yes'
+call(a,'/api/vote/undo',dict(v,choice='no',reason='Too much detail'));assert call(a,'/api/components')['components'][0]['vote']['choice']=='no'
+call(a,'/api/vote/undo',dict(v,choice=None,reason=''));assert call(a,'/api/components')['components'][0]['vote'] is None
+call(a,'/api/vote',v);call(a,'/api/vote',dict(v,choice='no',reason='Too much detail'))
 assert 'totals' not in call(b,'/api/components')['components'][0]
 call(b,'/api/export/json',status=403)
 call(a,'/api/vote',dict(v,version='old'),status=409)

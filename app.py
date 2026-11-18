@@ -223,6 +223,31 @@ def vote():
     return {'ok': True}
 
 
+@app.post('/api/vote/undo')
+@authenticated()
+def undo_vote():
+    if not session.get('person'):
+        abort(403, 'Enter your name and email first.')
+    p = request.get_json()
+    c = BY_ID.get(p.get('component')) if isinstance(p.get('component'), str) else None
+    if not c or p.get('version') != c['version']:
+        abort(409, 'Component version changed. Refresh before undoing.')
+    choice, reason = p.get('choice'), p.get('reason', '')
+    if choice is not None and choice not in ('yes', 'no', 'abstain'):
+        abort(400, 'Choose Yes, No, Abstain or null to remove your vote.')
+    if not isinstance(reason, str) or len(reason) > 240 or '\n' in reason:
+        abort(400, 'Keep your reason to one line, at most 240 characters.')
+    with db() as con:
+        if choice is None:
+            con.execute('DELETE FROM votes WHERE person=%s AND component=%s AND version=%s',
+                        (session['person'], c['id'], c['version']))
+        else:
+            con.execute('''INSERT INTO votes(person,component,version,choice,reason) VALUES (%s,%s,%s,%s,%s)
+            ON CONFLICT(person,component,version) DO UPDATE SET choice=excluded.choice,reason=excluded.reason,updated_at=now()''',
+            (session['person'], c['id'], c['version'], choice, reason))
+    return {'ok': True}
+
+
 @app.post('/api/status')
 @authenticated(owner=True)
 def status():
