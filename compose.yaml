@@ -1,0 +1,27 @@
+services:
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: board
+      POSTGRES_PASSWORD: local-board-only
+      POSTGRES_DB: board
+    volumes:
+      - votes:/var/lib/postgresql/data
+    healthcheck:
+      test: [CMD-SHELL, "pg_isready -U board"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+  web:
+    build: .
+    ports: ["8088:8080"]
+    env_file: .secrets/deployment.env
+    environment:
+      DATABASE_URL: postgresql://board:local-board-only@db:5432/board
+      COOKIE_SECURE: "false"
+      DATABASE_EXPIRES_AT: "2026-12-18"
+    depends_on:
+      db:
+        condition: service_healthy
+volumes:
+  votes:

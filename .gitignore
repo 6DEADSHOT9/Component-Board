@@ -1,6 +1,6 @@
 .env
 .secrets/
-.scratch*/
+.scratch*
 node_modules/
 *.sqlite*
 __pycache__/

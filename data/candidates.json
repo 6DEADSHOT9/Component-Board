@@ -1,0 +1,1429 @@
+[
+  {
+    "id": "assistant-ui-elements-tool-call",
+    "address": "@assistant-ui/elements-tool-call",
+    "addressUrl": "https://r.assistant-ui.com/elements-tool-call.json",
+    "registry": "@assistant-ui",
+    "name": "Tool call",
+    "need": "AI chat pieces",
+    "wave": "pilot-01",
+    "version": "845311205468becf073f5e56430bfd8750cf4609639e9484f892185f46cc8cc7",
+    "sourceRevision": "registry-sha256:845311205468becf073f5e56430bfd8750cf4609639e9484f892185f46cc8cc7",
+    "repositoryRevision": "03c06506107f55a7bc11bed616a2fed06af8a8ba",
+    "metadataHash": "a593fc9dd4a8955ed2b85238a7346bc8c64c1736e20cf692c7047c5d6a807ae6",
+    "license": {
+      "name": "MIT",
+      "verified": true,
+      "url": "https://github.com/assistant-ui/assistant-ui/blob/03c06506107f55a7bc11bed616a2fed06af8a8ba/LICENSE",
+      "repository": "assistant-ui/assistant-ui",
+      "revision": "03c06506107f55a7bc11bed616a2fed06af8a8ba",
+      "sha256": "eafb05991a572efa34097474b31fef45b14a8879ed1d1a8fd77de62e6fa7d275"
+    },
+    "tags": [
+      "layout.disclosure",
+      "ai.tool_activity"
+    ],
+    "dependencies": [
+      "lucide-react"
+    ],
+    "registryDependencies": [
+      "https://r.assistant-ui.com/elements-surfaces.json",
+      "https://r.assistant-ui.com/elements-collapsible-root.json"
+    ],
+    "portingEffort": "Low \u2014 rewrite Tailwind classes, preserve behaviour, test token themes and density",
+    "rubric": {
+      "fit": 5,
+      "accessibility_evidence": 2,
+      "state_evidence": 1,
+      "dependency_cost": 5,
+      "portability": 5,
+      "licence": 5
+    },
+    "score": 0.8518518518518519,
+    "pattern": "tool",
+    "why": "Matches item-level layout.disclosure, ai.tool_activity; tool interaction provides a distinct pilot comparison. Static source shows 2/4 accessibility indicators and 1/3 state indicators; these are evidence hints, not a passed accessibility audit. Permissive repository licence verified at a pinned commit.",
+    "signals": [
+      {
+        "event": "detail_changed",
+        "possible": "Makes possible: expansion/collapse of reasoning and tool details.",
+        "integration": "Wrap user-triggered disclosure changes with section type, initial state and opportunity_summary; F02."
+      },
+      {
+        "event": "object_opened",
+        "possible": "Makes possible: opening a cited source.",
+        "integration": "Bind owned reference IDs and emit object_opened/object_left; F05. No URLs in telemetry."
+      }
+    ],
+    "previews": {
+      "light": "/previews/assistant-ui-elements-tool-call/light.png",
+      "dark": "/previews/assistant-ui-elements-tool-call/dark.png",
+      "interaction": "/previews/assistant-ui-elements-tool-call/interaction.png",
+      "clip": "/previews/assistant-ui-elements-tool-call/clip.webm"
+    }
+  },
+  {
+    "id": "ai-elements-reasoning",
+    "address": "@ai-elements/reasoning",
+    "addressUrl": "https://ai-sdk.dev/elements/api/registry/reasoning.json",
+    "registry": "@ai-elements",
+    "name": "Reasoning",
+    "need": "AI chat pieces",
+    "wave": "pilot-01",
+    "version": "4d2e0195a483c40f3cb976ba87df2a931edbb3098bf968ba780f1cc155d5c1e9",
+    "sourceRevision": "registry-sha256:4d2e0195a483c40f3cb976ba87df2a931edbb3098bf968ba780f1cc155d5c1e9",
+    "repositoryRevision": "ca8be600bfd01b3131f9bf6134b51602a71f4374",
+    "metadataHash": "3cf1dc6efefc2085cea4742cc8ef457c959947901992f846ff33ac852b29dcb8",
+    "license": {
+      "name": "Apache-2.0",
+      "verified": true,
+      "url": "https://github.com/vercel/ai-elements/blob/ca8be600bfd01b3131f9bf6134b51602a71f4374/LICENSE",
+      "repository": "vercel/ai-elements",
+      "revision": "ca8be600bfd01b3131f9bf6134b51602a71f4374",
+      "sha256": "b4f9adb7c568904834d0dd6cc98d16c390d21ca32fc17ae7a267715269bd5529"
+    },
+    "tags": [
+      "ai.reasoning"
+    ],
+    "dependencies": [
+      "@radix-ui/react-use-controllable-state",
+      "@streamdown/cjk",
+      "@streamdown/code",
+      "@streamdown/math",
+      "@streamdown/mermaid",
+      "lucide-react",
+      "streamdown"
+    ],
+    "registryDependencies": [
+      "collapsible",
+      "https://elements.ai-sdk.dev/api/registry/shimmer.json"
+    ],
+    "portingEffort": "Medium \u2014 rewrite Tailwind classes, preserve behaviour, test token themes and density",
+    "rubric": {
+      "fit": 5,
+      "accessibility_evidence": 1,
+      "state_evidence": 2,
+      "dependency_cost": 2,
+      "portability": 5,
+      "licence": 5
+    },
+    "score": 0.7407407407407407,
+    "pattern": "reasoning",
+    "why": "Matches item-level ai.reasoning; reasoning interaction provides a distinct pilot comparison. Static source shows 1/4 accessibility indicators and 2/3 state indicators; these are evidence hints, not a passed accessibility audit. Permissive repository licence verified at a pinned commit.",
+    "signals": [
+      {
+        "event": "detail_changed",
+        "possible": "Makes possible: expansion/collapse of reasoning and tool details.",
+        "integration": "Wrap user-triggered disclosure changes with section type, initial state and opportunity_summary; F02."
+      },
+      {
+        "event": "object_opened",
+        "possible": "Makes possible: opening a cited source.",
+        "integration": "Bind owned reference IDs and emit object_opened/object_left; F05. No URLs in telemetry."
+      }
+    ],
+    "previews": {
+      "light": "/previews/ai-elements-reasoning/light.png",
+      "dark": "/previews/ai-elements-reasoning/dark.png",
+      "interaction": "/previews/ai-elements-reasoning/interaction.png",
+      "clip": "/previews/ai-elements-reasoning/clip.webm"
+    }
+  },
+  {
+    "id": "ai-elements-sources",
+    "address": "@ai-elements/sources",
+    "addressUrl": "https://ai-sdk.dev/elements/api/registry/sources.json",
+    "registry": "@ai-elements",
+    "name": "Sources",
+    "need": "AI chat pieces",
+    "wave": "pilot-01",
+    "version": "ded01a76a27cf4f2a8f49c88b300df02e07b25a812b3785798f731823621d978",
+    "sourceRevision": "registry-sha256:ded01a76a27cf4f2a8f49c88b300df02e07b25a812b3785798f731823621d978",
+    "repositoryRevision": "ca8be600bfd01b3131f9bf6134b51602a71f4374",
+    "metadataHash": "c513711d0c8f8b662ec0d6b58c4907253c5a0b1d5350bf0152d1059bbab17aa0",
+    "license": {
+      "name": "Apache-2.0",
+      "verified": true,
+      "url": "https://github.com/vercel/ai-elements/blob/ca8be600bfd01b3131f9bf6134b51602a71f4374/LICENSE",
+      "repository": "vercel/ai-elements",
+      "revision": "ca8be600bfd01b3131f9bf6134b51602a71f4374",
+      "sha256": "b4f9adb7c568904834d0dd6cc98d16c390d21ca32fc17ae7a267715269bd5529"
+    },
+    "tags": [
+      "ai.sources_citations"
+    ],
+    "dependencies": [
+      "lucide-react"
+    ],
+    "registryDependencies": [
+      "collapsible"
+    ],
+    "portingEffort": "Low \u2014 rewrite Tailwind classes, preserve behaviour, test token themes and density",
+    "rubric": {
+      "fit": 5,
+      "accessibility_evidence": 1,
+      "state_evidence": 0,
+      "dependency_cost": 5,
+      "portability": 5,
+      "licence": 5
+    },
+    "score": 0.7777777777777778,
+    "pattern": "sources",
+    "why": "Matches item-level ai.sources_citations; sources interaction provides a distinct pilot comparison. Static source shows 1/4 accessibility indicators and 0/3 state indicators; these are evidence hints, not a passed accessibility audit. Permissive repository licence verified at a pinned commit.",
+    "signals": [
+      {
+        "event": "detail_changed",
+        "possible": "Makes possible: expansion/collapse of reasoning and tool details.",
+        "integration": "Wrap user-triggered disclosure changes with section type, initial state and opportunity_summary; F02."
+      },
+      {
+        "event": "object_opened",
+        "possible": "Makes possible: opening a cited source.",
+        "integration": "Bind owned reference IDs and emit object_opened/object_left; F05. No URLs in telemetry."
+      }
+    ],
+    "previews": {
+      "light": "/previews/ai-elements-sources/light.png",
+      "dark": "/previews/ai-elements-sources/dark.png",
+      "interaction": "/previews/ai-elements-sources/interaction.png",
+      "clip": "/previews/ai-elements-sources/clip.webm"
+    }
+  },
+  {
+    "id": "elements-chat-input",
+    "address": "@elements/chat-input",
+    "addressUrl": "https://www.tryelements.dev/r/chat-input.json",
+    "registry": "@elements",
+    "name": "AI Chat Input",
+    "need": "Prompt input",
+    "wave": "pilot-01",
+    "version": "2bea0a20e8d52b89e63a73e1e2a031e634bbabcc2c22776a0eaf086f5b067ede",
+    "sourceRevision": "registry-sha256:2bea0a20e8d52b89e63a73e1e2a031e634bbabcc2c22776a0eaf086f5b067ede",
+    "repositoryRevision": "cb4d5283443a3b565893821257c886a0b6b6553b",
+    "metadataHash": "3edd0d974c428c4c3c6f75f226fbb0498bea29532b87518dfd90c702e2342b68",
+    "license": {
+      "name": "MIT",
+      "verified": true,
+      "url": "https://github.com/crafter-station/elements/blob/cb4d5283443a3b565893821257c886a0b6b6553b/LICENSE",
+      "repository": "crafter-station/elements",
+      "revision": "cb4d5283443a3b565893821257c886a0b6b6553b",
+      "sha256": "e010eef83778a3408f26d873349e61a4a5e159a7a1ab6ae1b843fab3b8a9e7e3"
+    },
+    "tags": [
+      "input.text",
+      "action.button",
+      "interaction.keyboard",
+      "layout.disclosure",
+      "ai.chat"
+    ],
+    "dependencies": [
+      "lucide-react"
+    ],
+    "registryDependencies": [
+      "button"
+    ],
+    "portingEffort": "Low \u2014 rewrite Tailwind classes, preserve behaviour, test token themes and density",
+    "rubric": {
+      "fit": 5,
+      "accessibility_evidence": 4,
+      "state_evidence": 1,
+      "dependency_cost": 5,
+      "portability": 5,
+      "licence": 5
+    },
+    "score": 0.9259259259259259,
+    "pattern": "input",
+    "why": "Matches item-level input.text, action.button, interaction.keyboard, layout.disclosure, ai.chat; input interaction provides a distinct pilot comparison. Static source shows 4/4 accessibility indicators and 1/3 state indicators; these are evidence hints, not a passed accessibility audit. Permissive repository licence verified at a pinned commit.",
+    "signals": [
+      {
+        "event": "composer_summary",
+        "possible": "Makes possible: coarse typing rhythm, pauses and editing transactions.",
+        "integration": "Summarize transient samples on-device; exclude sensitive controls; no raw keys or draft text in observations; F11\u2013F13."
+      },
+      {
+        "event": "draft_state",
+        "possible": "Makes possible: explicitly saving, restoring or discarding a draft.",
+        "integration": "Wire draft lifecycle and consent; deleted wording belongs only to the separate local 30-day content store, never analytics."
+      },
+      {
+        "event": "message_revised",
+        "possible": "Makes possible: editing a submitted prompt.",
+        "integration": "Emit after explicit revision; corrections alone do not establish response quality."
+      }
+    ],
+    "previews": {}
+  },
+  {
+    "id": "assistant-ui-elements-composer",
+    "address": "@assistant-ui/elements-composer",
+    "addressUrl": "https://r.assistant-ui.com/elements-composer.json",
+    "registry": "@assistant-ui",
+    "name": "Composer",
+    "need": "Prompt input",
+    "wave": "pilot-01",
+    "version": "373dab51309e68c6612a6129f60c7cf3e0d5e4be9f272a4dc0948bb9d8895b13",
+    "sourceRevision": "registry-sha256:373dab51309e68c6612a6129f60c7cf3e0d5e4be9f272a4dc0948bb9d8895b13",
+    "repositoryRevision": "03c06506107f55a7bc11bed616a2fed06af8a8ba",
+    "metadataHash": "3578690d0fa2e71c3723008f113109797f95901f5b0df4c39d7f62e9c23e6f7d",
+    "license": {
+      "name": "MIT",
+      "verified": true,
+      "url": "https://github.com/assistant-ui/assistant-ui/blob/03c06506107f55a7bc11bed616a2fed06af8a8ba/LICENSE",
+      "repository": "assistant-ui/assistant-ui",
+      "revision": "03c06506107f55a7bc11bed616a2fed06af8a8ba",
+      "sha256": "eafb05991a572efa34097474b31fef45b14a8879ed1d1a8fd77de62e6fa7d275"
+    },
+    "tags": [
+      "input.text",
+      "input.tags_mentions",
+      "ai.chat",
+      "media.audio_voice"
+    ],
+    "dependencies": [
+      "lucide-react"
+    ],
+    "registryDependencies": [
+      "https://r.assistant-ui.com/elements-surfaces.json",
+      "https://r.assistant-ui.com/elements-range.json"
+    ],
+    "portingEffort": "Medium \u2014 rewrite Tailwind classes, preserve behaviour, test token themes and density",
+    "rubric": {
+      "fit": 5,
+      "accessibility_evidence": 4,
+      "state_evidence": 2,
+      "dependency_cost": 5,
+      "portability": 4,
+      "licence": 5
+    },
+    "score": 0.9259259259259259,
+    "pattern": "composer",
+    "why": "Matches item-level input.text, input.tags_mentions, ai.chat, media.audio_voice; composer interaction provides a distinct pilot comparison. Static source shows 4/4 accessibility indicators and 2/3 state indicators; these are evidence hints, not a passed accessibility audit. Permissive repository licence verified at a pinned commit.",
+    "signals": [
+      {
+        "event": "composer_summary",
+        "possible": "Makes possible: coarse typing rhythm, pauses and editing transactions.",
+        "integration": "Summarize transient samples on-device; exclude sensitive controls; no raw keys or draft text in observations; F11\u2013F13."
+      },
+      {
+        "event": "draft_state",
+        "possible": "Makes possible: explicitly saving, restoring or discarding a draft.",
+        "integration": "Wire draft lifecycle and consent; deleted wording belongs only to the separate local 30-day content store, never analytics."
+      },
+      {
+        "event": "message_revised",
+        "possible": "Makes possible: editing a submitted prompt.",
+        "integration": "Emit after explicit revision; corrections alone do not establish response quality."
+      }
+    ],
+    "previews": {
+      "light": "/previews/assistant-ui-elements-composer/light.png",
+      "dark": "/previews/assistant-ui-elements-composer/dark.png",
+      "interaction": "/previews/assistant-ui-elements-composer/interaction.png",
+      "clip": "/previews/assistant-ui-elements-composer/clip.webm"
+    }
+  },
+  {
+    "id": "ai-elements-prompt-input",
+    "address": "@ai-elements/prompt-input",
+    "addressUrl": "https://ai-sdk.dev/elements/api/registry/prompt-input.json",
+    "registry": "@ai-elements",
+    "name": "Prompt Input",
+    "need": "Prompt input",
+    "wave": "pilot-01",
+    "version": "660efa7c9a10c204ceeb8d32a320ef430a26776b283a148113a1f672a90af0b8",
+    "sourceRevision": "registry-sha256:660efa7c9a10c204ceeb8d32a320ef430a26776b283a148113a1f672a90af0b8",
+    "repositoryRevision": "ca8be600bfd01b3131f9bf6134b51602a71f4374",
+    "metadataHash": "5067565e60604ae356c846acc979069522e942b3d7de5e01655ee0b77d64d052",
+    "license": {
+      "name": "Apache-2.0",
+      "verified": true,
+      "url": "https://github.com/vercel/ai-elements/blob/ca8be600bfd01b3131f9bf6134b51602a71f4374/LICENSE",
+      "repository": "vercel/ai-elements",
+      "revision": "ca8be600bfd01b3131f9bf6134b51602a71f4374",
+      "sha256": "b4f9adb7c568904834d0dd6cc98d16c390d21ca32fc17ae7a267715269bd5529"
+    },
+    "tags": [
+      "input.text",
+      "ai.chat"
+    ],
+    "dependencies": [
+      "ai",
+      "lucide-react",
+      "nanoid"
+    ],
+    "registryDependencies": [
+      "command",
+      "dropdown-menu",
+      "hover-card",
+      "input-group",
+      "select",
+      "spinner",
+      "tooltip"
+    ],
+    "portingEffort": "High \u2014 rewrite Tailwind classes, preserve behaviour, test token themes and density",
+    "rubric": {
+      "fit": 5,
+      "accessibility_evidence": 3,
+      "state_evidence": 3,
+      "dependency_cost": 4,
+      "portability": 3,
+      "licence": 5
+    },
+    "score": 0.8518518518518519,
+    "pattern": "input",
+    "why": "Matches item-level input.text, ai.chat; input interaction provides a distinct pilot comparison. Static source shows 3/4 accessibility indicators and 3/3 state indicators; these are evidence hints, not a passed accessibility audit. Permissive repository licence verified at a pinned commit.",
+    "signals": [
+      {
+        "event": "composer_summary",
+        "possible": "Makes possible: coarse typing rhythm, pauses and editing transactions.",
+        "integration": "Summarize transient samples on-device; exclude sensitive controls; no raw keys or draft text in observations; F11\u2013F13."
+      },
+      {
+        "event": "draft_state",
+        "possible": "Makes possible: explicitly saving, restoring or discarding a draft.",
+        "integration": "Wire draft lifecycle and consent; deleted wording belongs only to the separate local 30-day content store, never analytics."
+      },
+      {
+        "event": "message_revised",
+        "possible": "Makes possible: editing a submitted prompt.",
+        "integration": "Emit after explicit revision; corrections alone do not establish response quality."
+      }
+    ],
+    "previews": {
+      "light": "/previews/ai-elements-prompt-input/light.png",
+      "dark": "/previews/ai-elements-prompt-input/dark.png",
+      "interaction": "/previews/ai-elements-prompt-input/interaction.png",
+      "clip": "/previews/ai-elements-prompt-input/clip.webm"
+    }
+  },
+  {
+    "id": "assistant-ui-elements-terminal-block",
+    "address": "@assistant-ui/elements-terminal-block",
+    "addressUrl": "https://r.assistant-ui.com/elements-terminal-block.json",
+    "registry": "@assistant-ui",
+    "name": "Terminal block",
+    "need": "Code block",
+    "wave": "pilot-01",
+    "version": "b027d64cd326b58343b53b979d41c22bf6ed52d84d15245b4c7907e1970fdca0",
+    "sourceRevision": "registry-sha256:b027d64cd326b58343b53b979d41c22bf6ed52d84d15245b4c7907e1970fdca0",
+    "repositoryRevision": "03c06506107f55a7bc11bed616a2fed06af8a8ba",
+    "metadataHash": "5b881da99d3816903597d3d25787d4ea99082c5ff188522c8914806be5ac9355",
+    "license": {
+      "name": "MIT",
+      "verified": true,
+      "url": "https://github.com/assistant-ui/assistant-ui/blob/03c06506107f55a7bc11bed616a2fed06af8a8ba/LICENSE",
+      "repository": "assistant-ui/assistant-ui",
+      "revision": "03c06506107f55a7bc11bed616a2fed06af8a8ba",
+      "sha256": "eafb05991a572efa34097474b31fef45b14a8879ed1d1a8fd77de62e6fa7d275"
+    },
+    "tags": [
+      "feedback.status_progress",
+      "content.code"
+    ],
+    "dependencies": [
+      "lucide-react"
+    ],
+    "registryDependencies": [
+      "https://r.assistant-ui.com/elements-surfaces.json",
+      "https://r.assistant-ui.com/elements-range.json",
+      "https://r.assistant-ui.com/use-copy-to-clipboard.json"
+    ],
+    "portingEffort": "Medium \u2014 rewrite Tailwind classes, preserve behaviour, test token themes and density",
+    "rubric": {
+      "fit": 5,
+      "accessibility_evidence": 2,
+      "state_evidence": 1,
+      "dependency_cost": 5,
+      "portability": 5,
+      "licence": 5
+    },
+    "score": 0.8518518518518519,
+    "pattern": "terminal",
+    "why": "Matches item-level feedback.status_progress, content.code; terminal interaction provides a distinct pilot comparison. Static source shows 2/4 accessibility indicators and 1/3 state indicators; these are evidence hints, not a passed accessibility audit. Permissive repository licence verified at a pinned commit.",
+    "signals": [
+      {
+        "event": "output_action",
+        "possible": "Makes possible: copying or exporting displayed code.",
+        "integration": "Wire explicit copy/download success with output kind and opportunity_summary; F04; never clipboard contents."
+      }
+    ],
+    "previews": {
+      "light": "/previews/assistant-ui-elements-terminal-block/light.png",
+      "dark": "/previews/assistant-ui-elements-terminal-block/dark.png",
+      "interaction": "/previews/assistant-ui-elements-terminal-block/interaction.png",
+      "clip": "/previews/assistant-ui-elements-terminal-block/clip.webm"
+    }
+  },
+  {
+    "id": "kibo-ui-code-block",
+    "address": "@kibo-ui/code-block",
+    "addressUrl": "https://www.kibo-ui.com/r/code-block.json",
+    "registry": "@kibo-ui",
+    "name": "code-block",
+    "need": "Code block",
+    "wave": "pilot-01",
+    "version": "a02d345ba1d4ef5d9510369d07a6fc93e03eaf12d2ab7af6c631c76ce013618b",
+    "sourceRevision": "registry-sha256:a02d345ba1d4ef5d9510369d07a6fc93e03eaf12d2ab7af6c631c76ce013618b",
+    "repositoryRevision": "3d63cdb15b79d972e3dc38a10997987672f9b263",
+    "metadataHash": "de67dec96129830597649325f1117cdc2e412083c5e06569fda1306baa88f6cf",
+    "license": {
+      "name": "MIT",
+      "verified": true,
+      "url": "https://github.com/shadcnblocks/kibo/blob/3d63cdb15b79d972e3dc38a10997987672f9b263/license.md",
+      "repository": "shadcnblocks/kibo",
+      "revision": "3d63cdb15b79d972e3dc38a10997987672f9b263",
+      "sha256": "1fe9198b595ddadef7e2d99e3e1698c036db61c81e91c7b42df90d59f563b2ba"
+    },
+    "tags": [
+      "action.clipboard",
+      "content.code"
+    ],
+    "dependencies": [
+      "@radix-ui/react-use-controllable-state",
+      "@shikijs/transformers",
+      "lucide-react",
+      "react-icons",
+      "shiki"
+    ],
+    "registryDependencies": [
+      "button",
+      "select"
+    ],
+    "portingEffort": "Medium \u2014 rewrite Tailwind classes, preserve behaviour, test token themes and density",
+    "rubric": {
+      "fit": 5,
+      "accessibility_evidence": 2,
+      "state_evidence": 1,
+      "dependency_cost": 3,
+      "portability": 5,
+      "licence": 5
+    },
+    "score": 0.7777777777777778,
+    "pattern": "code",
+    "why": "Matches item-level action.clipboard, content.code; code interaction provides a distinct pilot comparison. Static source shows 2/4 accessibility indicators and 1/3 state indicators; these are evidence hints, not a passed accessibility audit. Permissive repository licence verified at a pinned commit.",
+    "signals": [
+      {
+        "event": "output_action",
+        "possible": "Makes possible: copying or exporting displayed code.",
+        "integration": "Wire explicit copy/download success with output kind and opportunity_summary; F04; never clipboard contents."
+      }
+    ],
+    "previews": {}
+  },
+  {
+    "id": "ai-elements-code-block",
+    "address": "@ai-elements/code-block",
+    "addressUrl": "https://ai-sdk.dev/elements/api/registry/code-block.json",
+    "registry": "@ai-elements",
+    "name": "Code Block",
+    "need": "Code block",
+    "wave": "pilot-01",
+    "version": "b5ac0e9373b26576c69a2035aae8868d957189bd3c52807bfa91e2a12904db32",
+    "sourceRevision": "registry-sha256:b5ac0e9373b26576c69a2035aae8868d957189bd3c52807bfa91e2a12904db32",
+    "repositoryRevision": "ca8be600bfd01b3131f9bf6134b51602a71f4374",
+    "metadataHash": "ddec0165213ccdc05db95b41434aa4c81c0c32f021f307b446b4c2a7a690ae51",
+    "license": {
+      "name": "Apache-2.0",
+      "verified": true,
+      "url": "https://github.com/vercel/ai-elements/blob/ca8be600bfd01b3131f9bf6134b51602a71f4374/LICENSE",
+      "repository": "vercel/ai-elements",
+      "revision": "ca8be600bfd01b3131f9bf6134b51602a71f4374",
+      "sha256": "b4f9adb7c568904834d0dd6cc98d16c390d21ca32fc17ae7a267715269bd5529"
+    },
+    "tags": [
+      "content.code"
+    ],
+    "dependencies": [
+      "lucide-react",
+      "shiki"
+    ],
+    "registryDependencies": [
+      "button",
+      "select"
+    ],
+    "portingEffort": "Medium \u2014 rewrite Tailwind classes, preserve behaviour, test token themes and density",
+    "rubric": {
+      "fit": 5,
+      "accessibility_evidence": 1,
+      "state_evidence": 1,
+      "dependency_cost": 4,
+      "portability": 5,
+      "licence": 5
+    },
+    "score": 0.7777777777777778,
+    "pattern": "code",
+    "why": "Matches item-level content.code; code interaction provides a distinct pilot comparison. Static source shows 1/4 accessibility indicators and 1/3 state indicators; these are evidence hints, not a passed accessibility audit. Permissive repository licence verified at a pinned commit.",
+    "signals": [
+      {
+        "event": "output_action",
+        "possible": "Makes possible: copying or exporting displayed code.",
+        "integration": "Wire explicit copy/download success with output kind and opportunity_summary; F04; never clipboard contents."
+      }
+    ],
+    "previews": {}
+  },
+  {
+    "id": "assistant-ui-elements-data-table",
+    "address": "@assistant-ui/elements-data-table",
+    "addressUrl": "https://r.assistant-ui.com/elements-data-table.json",
+    "registry": "@assistant-ui",
+    "name": "Data table",
+    "need": "Data table",
+    "wave": "pilot-01",
+    "version": "9cc03f883b64438d8b08fc079573c0c1ca798104e2f3c43ac3400fdbff26c828",
+    "sourceRevision": "registry-sha256:9cc03f883b64438d8b08fc079573c0c1ca798104e2f3c43ac3400fdbff26c828",
+    "repositoryRevision": "03c06506107f55a7bc11bed616a2fed06af8a8ba",
+    "metadataHash": "69b2ddaa7a7a3dcd2a1e137f1b406a816eabed6bca6abd18f8264eb5b5661337",
+    "license": {
+      "name": "MIT",
+      "verified": true,
+      "url": "https://github.com/assistant-ui/assistant-ui/blob/03c06506107f55a7bc11bed616a2fed06af8a8ba/LICENSE",
+      "repository": "assistant-ui/assistant-ui",
+      "revision": "03c06506107f55a7bc11bed616a2fed06af8a8ba",
+      "sha256": "eafb05991a572efa34097474b31fef45b14a8879ed1d1a8fd77de62e6fa7d275"
+    },
+    "tags": [
+      "data.table",
+      "layout.container"
+    ],
+    "dependencies": [],
+    "registryDependencies": [
+      "https://r.assistant-ui.com/elements-surfaces.json",
+      "https://r.assistant-ui.com/elements-href.json",
+      "https://r.assistant-ui.com/elements-range.json"
+    ],
+    "portingEffort": "Medium \u2014 rewrite Tailwind classes, preserve behaviour, test token themes and density",
+    "rubric": {
+      "fit": 5,
+      "accessibility_evidence": 3,
+      "state_evidence": 1,
+      "dependency_cost": 5,
+      "portability": 4,
+      "licence": 5
+    },
+    "score": 0.8518518518518519,
+    "pattern": "table",
+    "why": "Matches item-level data.table, layout.container; table interaction provides a distinct pilot comparison. Static source shows 3/4 accessibility indicators and 1/3 state indicators; these are evidence hints, not a passed accessibility audit. Permissive repository licence verified at a pinned commit.",
+    "signals": [
+      {
+        "event": "collection_control_changed",
+        "possible": "Makes possible: sorting and filtering rows.",
+        "integration": "Instrument user changes with allowlisted control IDs and opportunity_summary; F09."
+      },
+      {
+        "event": "representation_changed",
+        "possible": "Makes possible: switching table and chart for the same dataset.",
+        "integration": "Add a second representation and user-triggered switch instrumentation; F06."
+      }
+    ],
+    "previews": {
+      "light": "/previews/assistant-ui-elements-data-table/light.png",
+      "dark": "/previews/assistant-ui-elements-data-table/dark.png",
+      "interaction": "/previews/assistant-ui-elements-data-table/interaction.png",
+      "clip": "/previews/assistant-ui-elements-data-table/clip.webm"
+    }
+  },
+  {
+    "id": "kibo-ui-table",
+    "address": "@kibo-ui/table",
+    "addressUrl": "https://www.kibo-ui.com/r/table.json",
+    "registry": "@kibo-ui",
+    "name": "table",
+    "need": "Data table",
+    "wave": "pilot-01",
+    "version": "9c95bba33bd81e87b0cfe0c6c963f1522e0ee796ef479757b02c1d9f53abc763",
+    "sourceRevision": "registry-sha256:9c95bba33bd81e87b0cfe0c6c963f1522e0ee796ef479757b02c1d9f53abc763",
+    "repositoryRevision": "3d63cdb15b79d972e3dc38a10997987672f9b263",
+    "metadataHash": "66fa06dc529422ef7fe92e9d179426d3ddab8bf45018ccb3cebbc94915882c18",
+    "license": {
+      "name": "MIT",
+      "verified": true,
+      "url": "https://github.com/shadcnblocks/kibo/blob/3d63cdb15b79d972e3dc38a10997987672f9b263/license.md",
+      "repository": "shadcnblocks/kibo",
+      "revision": "3d63cdb15b79d972e3dc38a10997987672f9b263",
+      "sha256": "1fe9198b595ddadef7e2d99e3e1698c036db61c81e91c7b42df90d59f563b2ba"
+    },
+    "tags": [
+      "data.table"
+    ],
+    "dependencies": [
+      "@tanstack/react-table",
+      "jotai",
+      "lucide-react"
+    ],
+    "registryDependencies": [
+      "button",
+      "dropdown-menu",
+      "table"
+    ],
+    "portingEffort": "Medium \u2014 rewrite Tailwind classes, preserve behaviour, test token themes and density",
+    "rubric": {
+      "fit": 5,
+      "accessibility_evidence": 1,
+      "state_evidence": 2,
+      "dependency_cost": 4,
+      "portability": 5,
+      "licence": 5
+    },
+    "score": 0.8148148148148148,
+    "pattern": "table",
+    "why": "Matches item-level data.table; table interaction provides a distinct pilot comparison. Static source shows 1/4 accessibility indicators and 2/3 state indicators; these are evidence hints, not a passed accessibility audit. Permissive repository licence verified at a pinned commit.",
+    "signals": [
+      {
+        "event": "collection_control_changed",
+        "possible": "Makes possible: sorting and filtering rows.",
+        "integration": "Instrument user changes with allowlisted control IDs and opportunity_summary; F09."
+      },
+      {
+        "event": "representation_changed",
+        "possible": "Makes possible: switching table and chart for the same dataset.",
+        "integration": "Add a second representation and user-triggered switch instrumentation; F06."
+      }
+    ],
+    "previews": {}
+  },
+  {
+    "id": "assistant-ui-elements-spec-sheet",
+    "address": "@assistant-ui/elements-spec-sheet",
+    "addressUrl": "https://r.assistant-ui.com/elements-spec-sheet.json",
+    "registry": "@assistant-ui",
+    "name": "Spec sheet",
+    "need": "Data table",
+    "wave": "pilot-01",
+    "version": "c17c5edb368f89065d093ba4344b2c53b67d0d9f5bda7a1e4a93eba32c900469",
+    "sourceRevision": "registry-sha256:c17c5edb368f89065d093ba4344b2c53b67d0d9f5bda7a1e4a93eba32c900469",
+    "repositoryRevision": "03c06506107f55a7bc11bed616a2fed06af8a8ba",
+    "metadataHash": "4996cb2ea228f848b75b9d692e28acc006face2830d38e494363db1447ec10c7",
+    "license": {
+      "name": "MIT",
+      "verified": true,
+      "url": "https://github.com/assistant-ui/assistant-ui/blob/03c06506107f55a7bc11bed616a2fed06af8a8ba/LICENSE",
+      "repository": "assistant-ui/assistant-ui",
+      "revision": "03c06506107f55a7bc11bed616a2fed06af8a8ba",
+      "sha256": "eafb05991a572efa34097474b31fef45b14a8879ed1d1a8fd77de62e6fa7d275"
+    },
+    "tags": [
+      "data.table",
+      "layout.overlay"
+    ],
+    "dependencies": [],
+    "registryDependencies": [
+      "https://r.assistant-ui.com/elements-surfaces.json",
+      "https://r.assistant-ui.com/elements-range.json"
+    ],
+    "portingEffort": "Low \u2014 rewrite Tailwind classes, preserve behaviour, test token themes and density",
+    "rubric": {
+      "fit": 5,
+      "accessibility_evidence": 0,
+      "state_evidence": 0,
+      "dependency_cost": 5,
+      "portability": 5,
+      "licence": 5
+    },
+    "score": 0.7407407407407407,
+    "pattern": "spec-sheet",
+    "why": "Matches item-level data.table, layout.overlay; spec-sheet interaction provides a distinct pilot comparison. Static source shows 0/4 accessibility indicators and 0/3 state indicators; these are evidence hints, not a passed accessibility audit. Permissive repository licence verified at a pinned commit.",
+    "signals": [
+      {
+        "event": "collection_control_changed",
+        "possible": "Makes possible: sorting and filtering rows.",
+        "integration": "Instrument user changes with allowlisted control IDs and opportunity_summary; F09."
+      },
+      {
+        "event": "representation_changed",
+        "possible": "Makes possible: switching table and chart for the same dataset.",
+        "integration": "Add a second representation and user-triggered switch instrumentation; F06."
+      }
+    ],
+    "previews": {}
+  },
+  {
+    "id": "kibo-ui-contribution-graph",
+    "address": "@kibo-ui/contribution-graph",
+    "addressUrl": "https://www.kibo-ui.com/r/contribution-graph.json",
+    "registry": "@kibo-ui",
+    "name": "contribution-graph",
+    "need": "Chart",
+    "wave": "pilot-01",
+    "version": "95402cab69895dc4db94be5d6fc5d63a9dc4b666421908edcd8a8ebd1fa5b353",
+    "sourceRevision": "registry-sha256:95402cab69895dc4db94be5d6fc5d63a9dc4b666421908edcd8a8ebd1fa5b353",
+    "repositoryRevision": "3d63cdb15b79d972e3dc38a10997987672f9b263",
+    "metadataHash": "dd9125d265aa38de20c4274c8bd61ae3d7db9d6e88a200618b7198bf334c38d7",
+    "license": {
+      "name": "MIT",
+      "verified": true,
+      "url": "https://github.com/shadcnblocks/kibo/blob/3d63cdb15b79d972e3dc38a10997987672f9b263/license.md",
+      "repository": "shadcnblocks/kibo",
+      "revision": "3d63cdb15b79d972e3dc38a10997987672f9b263",
+      "sha256": "1fe9198b595ddadef7e2d99e3e1698c036db61c81e91c7b42df90d59f563b2ba"
+    },
+    "tags": [
+      "data.chart.heatmap"
+    ],
+    "dependencies": [
+      "date-fns"
+    ],
+    "registryDependencies": [],
+    "portingEffort": "Medium \u2014 rewrite Tailwind classes, preserve behaviour, test token themes and density",
+    "rubric": {
+      "fit": 5,
+      "accessibility_evidence": 0,
+      "state_evidence": 2,
+      "dependency_cost": 5,
+      "portability": 5,
+      "licence": 5
+    },
+    "score": 0.8148148148148148,
+    "pattern": "graph",
+    "why": "Matches item-level data.chart.heatmap; graph interaction provides a distinct pilot comparison. Static source shows 0/4 accessibility indicators and 2/3 state indicators; these are evidence hints, not a passed accessibility audit. Permissive repository licence verified at a pinned commit.",
+    "signals": [
+      {
+        "event": "representation_changed",
+        "possible": "Makes possible: switching a chart to a table.",
+        "integration": "Provide the same underlying dataset in both representations; emit opportunity_summary and user switches; F06."
+      },
+      {
+        "event": "collection_control_changed",
+        "possible": "Makes possible: changing a chart range or filter.",
+        "integration": "Add allowlisted filters and distinguish defaults from user actions; F09."
+      }
+    ],
+    "previews": {
+      "light": "/previews/kibo-ui-contribution-graph/light.png",
+      "dark": "/previews/kibo-ui-contribution-graph/dark.png"
+    }
+  },
+  {
+    "id": "assistant-ui-elements-chart",
+    "address": "@assistant-ui/elements-chart",
+    "addressUrl": "https://r.assistant-ui.com/elements-chart.json",
+    "registry": "@assistant-ui",
+    "name": "Chart",
+    "need": "Chart",
+    "wave": "pilot-01",
+    "version": "8039d1ac8b221fabef05d776f1d6d221086c587b85cfeda28473ba69cf542a80",
+    "sourceRevision": "registry-sha256:8039d1ac8b221fabef05d776f1d6d221086c587b85cfeda28473ba69cf542a80",
+    "repositoryRevision": "03c06506107f55a7bc11bed616a2fed06af8a8ba",
+    "metadataHash": "6f2dd17c75e8ba056288c1085c3df3475258dedd8560c24e0b81ccb3735bf318",
+    "license": {
+      "name": "MIT",
+      "verified": true,
+      "url": "https://github.com/assistant-ui/assistant-ui/blob/03c06506107f55a7bc11bed616a2fed06af8a8ba/LICENSE",
+      "repository": "assistant-ui/assistant-ui",
+      "revision": "03c06506107f55a7bc11bed616a2fed06af8a8ba",
+      "sha256": "eafb05991a572efa34097474b31fef45b14a8879ed1d1a8fd77de62e6fa7d275"
+    },
+    "tags": [
+      "data.chart"
+    ],
+    "dependencies": [],
+    "registryDependencies": [
+      "https://r.assistant-ui.com/elements-surfaces.json",
+      "https://r.assistant-ui.com/elements-range.json"
+    ],
+    "portingEffort": "Low \u2014 rewrite Tailwind classes, preserve behaviour, test token themes and density",
+    "rubric": {
+      "fit": 5,
+      "accessibility_evidence": 1,
+      "state_evidence": 0,
+      "dependency_cost": 5,
+      "portability": 5,
+      "licence": 5
+    },
+    "score": 0.7777777777777778,
+    "pattern": "chart",
+    "why": "Matches item-level data.chart; chart interaction provides a distinct pilot comparison. Static source shows 1/4 accessibility indicators and 0/3 state indicators; these are evidence hints, not a passed accessibility audit. Permissive repository licence verified at a pinned commit.",
+    "signals": [
+      {
+        "event": "representation_changed",
+        "possible": "Makes possible: switching a chart to a table.",
+        "integration": "Provide the same underlying dataset in both representations; emit opportunity_summary and user switches; F06."
+      },
+      {
+        "event": "collection_control_changed",
+        "possible": "Makes possible: changing a chart range or filter.",
+        "integration": "Add allowlisted filters and distinguish defaults from user actions; F09."
+      }
+    ],
+    "previews": {
+      "light": "/previews/assistant-ui-elements-chart/light.png",
+      "dark": "/previews/assistant-ui-elements-chart/dark.png"
+    }
+  },
+  {
+    "id": "kibo-ui-gantt",
+    "address": "@kibo-ui/gantt",
+    "addressUrl": "https://www.kibo-ui.com/r/gantt.json",
+    "registry": "@kibo-ui",
+    "name": "gantt",
+    "need": "Chart",
+    "wave": "pilot-01",
+    "version": "83aed0a5f157f535f169f6ba3ad47af552cd2babb14745a45fa3b82633745eeb",
+    "sourceRevision": "registry-sha256:83aed0a5f157f535f169f6ba3ad47af552cd2babb14745a45fa3b82633745eeb",
+    "repositoryRevision": "3d63cdb15b79d972e3dc38a10997987672f9b263",
+    "metadataHash": "72595af870212d44b40347dff2fb5b2fca60cb9092301bba0f07e09b0f92833e",
+    "license": {
+      "name": "MIT",
+      "verified": true,
+      "url": "https://github.com/shadcnblocks/kibo/blob/3d63cdb15b79d972e3dc38a10997987672f9b263/license.md",
+      "repository": "shadcnblocks/kibo",
+      "revision": "3d63cdb15b79d972e3dc38a10997987672f9b263",
+      "sha256": "1fe9198b595ddadef7e2d99e3e1698c036db61c81e91c7b42df90d59f563b2ba"
+    },
+    "tags": [
+      "data.chart",
+      "feedback.status_progress",
+      "workflow.schedule"
+    ],
+    "dependencies": [
+      "@dnd-kit/core",
+      "@dnd-kit/modifiers",
+      "@uidotdev/usehooks",
+      "date-fns",
+      "jotai",
+      "lodash.throttle",
+      "lucide-react"
+    ],
+    "registryDependencies": [
+      "card",
+      "context-menu"
+    ],
+    "portingEffort": "High \u2014 rewrite Tailwind classes, preserve behaviour, test token themes and density",
+    "rubric": {
+      "fit": 5,
+      "accessibility_evidence": 3,
+      "state_evidence": 0,
+      "dependency_cost": 2,
+      "portability": 3,
+      "licence": 5
+    },
+    "score": 0.6666666666666666,
+    "pattern": "gantt",
+    "why": "Matches item-level data.chart, feedback.status_progress, workflow.schedule; gantt interaction provides a distinct pilot comparison. Static source shows 3/4 accessibility indicators and 0/3 state indicators; these are evidence hints, not a passed accessibility audit. Permissive repository licence verified at a pinned commit.",
+    "signals": [
+      {
+        "event": "representation_changed",
+        "possible": "Makes possible: switching a chart to a table.",
+        "integration": "Provide the same underlying dataset in both representations; emit opportunity_summary and user switches; F06."
+      },
+      {
+        "event": "collection_control_changed",
+        "possible": "Makes possible: changing a chart range or filter.",
+        "integration": "Add allowlisted filters and distinguish defaults from user actions; F09."
+      }
+    ],
+    "previews": {}
+  },
+  {
+    "id": "ai-elements-file-tree",
+    "address": "@ai-elements/file-tree",
+    "addressUrl": "https://ai-sdk.dev/elements/api/registry/file-tree.json",
+    "registry": "@ai-elements",
+    "name": "File Tree",
+    "need": "Files and attachments",
+    "wave": "pilot-01",
+    "version": "df8b9be8407e5a23bc6ca181cbdbea582daa2be36e5c22774bd651e0855632c7",
+    "sourceRevision": "registry-sha256:df8b9be8407e5a23bc6ca181cbdbea582daa2be36e5c22774bd651e0855632c7",
+    "repositoryRevision": "ca8be600bfd01b3131f9bf6134b51602a71f4374",
+    "metadataHash": "a086ebb33ca3277ba759dc338f2f9717fbe8010bb3727d50d9cb7427a5c979fc",
+    "license": {
+      "name": "Apache-2.0",
+      "verified": true,
+      "url": "https://github.com/vercel/ai-elements/blob/ca8be600bfd01b3131f9bf6134b51602a71f4374/LICENSE",
+      "repository": "vercel/ai-elements",
+      "revision": "ca8be600bfd01b3131f9bf6134b51602a71f4374",
+      "sha256": "b4f9adb7c568904834d0dd6cc98d16c390d21ca32fc17ae7a267715269bd5529"
+    },
+    "tags": [
+      "files.browse"
+    ],
+    "dependencies": [
+      "lucide-react"
+    ],
+    "registryDependencies": [
+      "collapsible"
+    ],
+    "portingEffort": "Medium \u2014 rewrite Tailwind classes, preserve behaviour, test token themes and density",
+    "rubric": {
+      "fit": 5,
+      "accessibility_evidence": 2,
+      "state_evidence": 1,
+      "dependency_cost": 5,
+      "portability": 5,
+      "licence": 5
+    },
+    "score": 0.8518518518518519,
+    "pattern": "tree",
+    "why": "Matches item-level files.browse; tree interaction provides a distinct pilot comparison. Static source shows 2/4 accessibility indicators and 1/3 state indicators; these are evidence hints, not a passed accessibility audit. Permissive repository licence verified at a pinned commit.",
+    "signals": [
+      {
+        "event": "attachment_state",
+        "possible": "Makes possible: adding/removing files and submission attachment counts.",
+        "integration": "Wire upload lifecycle to owned file references and message_submitted; no filenames, paths or contents in analytics; F14."
+      },
+      {
+        "event": "object_opened",
+        "possible": "Makes possible: opening or revisiting an attachment.",
+        "integration": "Bind stable owned content identity and emit object_opened/object_left; F05."
+      }
+    ],
+    "previews": {}
+  },
+  {
+    "id": "kibo-ui-dropzone",
+    "address": "@kibo-ui/dropzone",
+    "addressUrl": "https://www.kibo-ui.com/r/dropzone.json",
+    "registry": "@kibo-ui",
+    "name": "dropzone",
+    "need": "Files and attachments",
+    "wave": "pilot-01",
+    "version": "4bcd4ffadc9f8d88bf2d6168721ba108c26933656287cadf531d1aeef5b68fc5",
+    "sourceRevision": "registry-sha256:4bcd4ffadc9f8d88bf2d6168721ba108c26933656287cadf531d1aeef5b68fc5",
+    "repositoryRevision": "3d63cdb15b79d972e3dc38a10997987672f9b263",
+    "metadataHash": "661e362f3307670a6f7ff8058d48350fc2833ec08aaee092cafee2061f2bbfc6",
+    "license": {
+      "name": "MIT",
+      "verified": true,
+      "url": "https://github.com/shadcnblocks/kibo/blob/3d63cdb15b79d972e3dc38a10997987672f9b263/license.md",
+      "repository": "shadcnblocks/kibo",
+      "revision": "3d63cdb15b79d972e3dc38a10997987672f9b263",
+      "sha256": "1fe9198b595ddadef7e2d99e3e1698c036db61c81e91c7b42df90d59f563b2ba"
+    },
+    "tags": [
+      "layout.container",
+      "workflow.drag_drop",
+      "files.upload"
+    ],
+    "dependencies": [
+      "lucide-react",
+      "react-dropzone"
+    ],
+    "registryDependencies": [
+      "button"
+    ],
+    "portingEffort": "Low \u2014 rewrite Tailwind classes, preserve behaviour, test token themes and density",
+    "rubric": {
+      "fit": 5,
+      "accessibility_evidence": 1,
+      "state_evidence": 2,
+      "dependency_cost": 4,
+      "portability": 5,
+      "licence": 5
+    },
+    "score": 0.8148148148148148,
+    "pattern": "dropzone",
+    "why": "Matches item-level layout.container, workflow.drag_drop, files.upload; dropzone interaction provides a distinct pilot comparison. Static source shows 1/4 accessibility indicators and 2/3 state indicators; these are evidence hints, not a passed accessibility audit. Permissive repository licence verified at a pinned commit.",
+    "signals": [
+      {
+        "event": "attachment_state",
+        "possible": "Makes possible: adding/removing files and submission attachment counts.",
+        "integration": "Wire upload lifecycle to owned file references and message_submitted; no filenames, paths or contents in analytics; F14."
+      },
+      {
+        "event": "object_opened",
+        "possible": "Makes possible: opening or revisiting an attachment.",
+        "integration": "Bind stable owned content identity and emit object_opened/object_left; F05."
+      }
+    ],
+    "previews": {}
+  },
+  {
+    "id": "assistant-ui-elements-file-tree",
+    "address": "@assistant-ui/elements-file-tree",
+    "addressUrl": "https://r.assistant-ui.com/elements-file-tree.json",
+    "registry": "@assistant-ui",
+    "name": "File tree",
+    "need": "Files and attachments",
+    "wave": "pilot-01",
+    "version": "269d5fc223b2fa0b3ac0470895dff6936befdce3d470d52e7d96aca01148ad73",
+    "sourceRevision": "registry-sha256:269d5fc223b2fa0b3ac0470895dff6936befdce3d470d52e7d96aca01148ad73",
+    "repositoryRevision": "03c06506107f55a7bc11bed616a2fed06af8a8ba",
+    "metadataHash": "00111d8cb5337bb14f5ff1fef70f20e0d44b0d0e583cad75e192a4fb79be733a",
+    "license": {
+      "name": "MIT",
+      "verified": true,
+      "url": "https://github.com/assistant-ui/assistant-ui/blob/03c06506107f55a7bc11bed616a2fed06af8a8ba/LICENSE",
+      "repository": "assistant-ui/assistant-ui",
+      "revision": "03c06506107f55a7bc11bed616a2fed06af8a8ba",
+      "sha256": "eafb05991a572efa34097474b31fef45b14a8879ed1d1a8fd77de62e6fa7d275"
+    },
+    "tags": [
+      "files.browse"
+    ],
+    "dependencies": [
+      "lucide-react"
+    ],
+    "registryDependencies": [
+      "https://r.assistant-ui.com/elements-surfaces.json",
+      "https://r.assistant-ui.com/elements-range.json"
+    ],
+    "portingEffort": "Low \u2014 rewrite Tailwind classes, preserve behaviour, test token themes and density",
+    "rubric": {
+      "fit": 5,
+      "accessibility_evidence": 0,
+      "state_evidence": 0,
+      "dependency_cost": 5,
+      "portability": 5,
+      "licence": 5
+    },
+    "score": 0.7407407407407407,
+    "pattern": "tree",
+    "why": "Matches item-level files.browse; tree interaction provides a distinct pilot comparison. Static source shows 0/4 accessibility indicators and 0/3 state indicators; these are evidence hints, not a passed accessibility audit. Permissive repository licence verified at a pinned commit.",
+    "signals": [
+      {
+        "event": "attachment_state",
+        "possible": "Makes possible: adding/removing files and submission attachment counts.",
+        "integration": "Wire upload lifecycle to owned file references and message_submitted; no filenames, paths or contents in analytics; F14."
+      },
+      {
+        "event": "object_opened",
+        "possible": "Makes possible: opening or revisiting an attachment.",
+        "integration": "Bind stable owned content identity and emit object_opened/object_left; F05."
+      }
+    ],
+    "previews": {}
+  },
+  {
+    "id": "diceui-command-stack",
+    "address": "@diceui/command-stack",
+    "addressUrl": "https://diceui.com/r/new-york/command-stack.json",
+    "registry": "@diceui",
+    "name": "command-stack",
+    "need": "Command palette and search",
+    "wave": "pilot-01",
+    "version": "6c6b511c1113cc29be9d075175dec334db998faf6e1ce813014163b502031d97",
+    "sourceRevision": "registry-sha256:6c6b511c1113cc29be9d075175dec334db998faf6e1ce813014163b502031d97",
+    "repositoryRevision": "8e6a4f2c19a04e6dc42e4db8d6493f7e0a802910",
+    "metadataHash": "51299ae9dc950aa44da1840d6aef7d42025982668bef8c5ede39e007a68af946",
+    "license": {
+      "name": "MIT",
+      "verified": true,
+      "url": "https://github.com/sadmann7/diceui/blob/8e6a4f2c19a04e6dc42e4db8d6493f7e0a802910/LICENSE",
+      "repository": "sadmann7/diceui",
+      "revision": "8e6a4f2c19a04e6dc42e4db8d6493f7e0a802910",
+      "sha256": "798456e9f649d796bad55d80f9ee50a71eb2d16920300a66a8221b70123e40db"
+    },
+    "tags": [
+      "data.search",
+      "layout.container"
+    ],
+    "dependencies": [
+      "cn",
+      "cmdk",
+      "radix-ui"
+    ],
+    "registryDependencies": [
+      "command",
+      "input-group"
+    ],
+    "portingEffort": "Medium \u2014 rewrite Tailwind classes, preserve behaviour, test token themes and density",
+    "rubric": {
+      "fit": 5,
+      "accessibility_evidence": 4,
+      "state_evidence": 3,
+      "dependency_cost": 4,
+      "portability": 4,
+      "licence": 5
+    },
+    "score": 0.9259259259259259,
+    "pattern": "command",
+    "why": "Matches item-level data.search, layout.container; command interaction provides a distinct pilot comparison. Static source shows 4/4 accessibility indicators and 3/3 state indicators; these are evidence hints, not a passed accessibility audit. Permissive repository licence verified at a pinned commit.",
+    "signals": [
+      {
+        "event": "search_started",
+        "possible": "Makes possible: search episodes and refinement.",
+        "integration": "Wire search_results/search_refined/search_result_opened/search_closed with result rank and no query text; F08."
+      },
+      {
+        "event": "action_invoked",
+        "possible": "Makes possible: keyboard and command activation.",
+        "integration": "Capture semantic action ID and modality, with eligible opportunities; F01/F10; never raw key sequences."
+      }
+    ],
+    "previews": {}
+  },
+  {
+    "id": "kibo-ui-combobox",
+    "address": "@kibo-ui/combobox",
+    "addressUrl": "https://www.kibo-ui.com/r/combobox.json",
+    "registry": "@kibo-ui",
+    "name": "combobox",
+    "need": "Command palette and search",
+    "wave": "pilot-01",
+    "version": "3d4a0d9e74228a9fc8a25409159b55305c2f6cd715bd7fa0d46298630a0135a7",
+    "sourceRevision": "registry-sha256:3d4a0d9e74228a9fc8a25409159b55305c2f6cd715bd7fa0d46298630a0135a7",
+    "repositoryRevision": "3d63cdb15b79d972e3dc38a10997987672f9b263",
+    "metadataHash": "285d006bc73f84d9d0c1b0bd1058af643bc19629aaf8d08a89ea1247e44b75fa",
+    "license": {
+      "name": "MIT",
+      "verified": true,
+      "url": "https://github.com/shadcnblocks/kibo/blob/3d63cdb15b79d972e3dc38a10997987672f9b263/license.md",
+      "repository": "shadcnblocks/kibo",
+      "revision": "3d63cdb15b79d972e3dc38a10997987672f9b263",
+      "sha256": "1fe9198b595ddadef7e2d99e3e1698c036db61c81e91c7b42df90d59f563b2ba"
+    },
+    "tags": [
+      "data.search",
+      "input.text",
+      "input.selection",
+      "data.record_list"
+    ],
+    "dependencies": [
+      "@radix-ui/react-use-controllable-state",
+      "lucide-react"
+    ],
+    "registryDependencies": [
+      "button",
+      "command",
+      "popover"
+    ],
+    "portingEffort": "Medium \u2014 rewrite Tailwind classes, preserve behaviour, test token themes and density",
+    "rubric": {
+      "fit": 5,
+      "accessibility_evidence": 2,
+      "state_evidence": 1,
+      "dependency_cost": 4,
+      "portability": 5,
+      "licence": 5
+    },
+    "score": 0.8148148148148148,
+    "pattern": "combobox",
+    "why": "Matches item-level data.search, input.text, input.selection, data.record_list; combobox interaction provides a distinct pilot comparison. Static source shows 2/4 accessibility indicators and 1/3 state indicators; these are evidence hints, not a passed accessibility audit. Permissive repository licence verified at a pinned commit.",
+    "signals": [
+      {
+        "event": "search_started",
+        "possible": "Makes possible: search episodes and refinement.",
+        "integration": "Wire search_results/search_refined/search_result_opened/search_closed with result rank and no query text; F08."
+      },
+      {
+        "event": "action_invoked",
+        "possible": "Makes possible: keyboard and command activation.",
+        "integration": "Capture semantic action ID and modality, with eligible opportunities; F01/F10; never raw key sequences."
+      }
+    ],
+    "previews": {}
+  },
+  {
+    "id": "assistant-ui-elements-command-palette",
+    "address": "@assistant-ui/elements-command-palette",
+    "addressUrl": "https://r.assistant-ui.com/elements-command-palette.json",
+    "registry": "@assistant-ui",
+    "name": "Command palette",
+    "need": "Command palette and search",
+    "wave": "pilot-01",
+    "version": "473b0c13ceb9798ced2e9e846e4b02e8af364301d0ea1de0a108d3bd2c7692d6",
+    "sourceRevision": "registry-sha256:473b0c13ceb9798ced2e9e846e4b02e8af364301d0ea1de0a108d3bd2c7692d6",
+    "repositoryRevision": "03c06506107f55a7bc11bed616a2fed06af8a8ba",
+    "metadataHash": "30d2c32b29eefed882e5a4dca5eacc93adf5b8257ace8df2f76671296b166f6f",
+    "license": {
+      "name": "MIT",
+      "verified": true,
+      "url": "https://github.com/assistant-ui/assistant-ui/blob/03c06506107f55a7bc11bed616a2fed06af8a8ba/LICENSE",
+      "repository": "assistant-ui/assistant-ui",
+      "revision": "03c06506107f55a7bc11bed616a2fed06af8a8ba",
+      "sha256": "eafb05991a572efa34097474b31fef45b14a8879ed1d1a8fd77de62e6fa7d275"
+    },
+    "tags": [
+      "data.search",
+      "system.theme"
+    ],
+    "dependencies": [
+      "lucide-react"
+    ],
+    "registryDependencies": [
+      "https://r.assistant-ui.com/elements-surfaces.json"
+    ],
+    "portingEffort": "Medium \u2014 rewrite Tailwind classes, preserve behaviour, test token themes and density",
+    "rubric": {
+      "fit": 5,
+      "accessibility_evidence": 4,
+      "state_evidence": 0,
+      "dependency_cost": 5,
+      "portability": 5,
+      "licence": 5
+    },
+    "score": 0.8888888888888888,
+    "pattern": "command",
+    "why": "Matches item-level data.search, system.theme; command interaction provides a distinct pilot comparison. Static source shows 4/4 accessibility indicators and 0/3 state indicators; these are evidence hints, not a passed accessibility audit. Permissive repository licence verified at a pinned commit.",
+    "signals": [
+      {
+        "event": "search_started",
+        "possible": "Makes possible: search episodes and refinement.",
+        "integration": "Wire search_results/search_refined/search_result_opened/search_closed with result rank and no query text; F08."
+      },
+      {
+        "event": "action_invoked",
+        "possible": "Makes possible: keyboard and command activation.",
+        "integration": "Capture semantic action ID and modality, with eligible opportunities; F01/F10; never raw key sequences."
+      }
+    ],
+    "previews": {}
+  },
+  {
+    "id": "coss-toast",
+    "address": "@coss/toast",
+    "addressUrl": "https://coss.com/ui/r/toast.json",
+    "registry": "@coss",
+    "name": "toast",
+    "need": "Toast and inline feedback",
+    "wave": "pilot-01",
+    "version": "17f22852905be5e4eaa449c386e3e451219c570b39d50c083c0341fc217e8b2d",
+    "sourceRevision": "registry-sha256:17f22852905be5e4eaa449c386e3e451219c570b39d50c083c0341fc217e8b2d",
+    "repositoryRevision": "b2336c45f2b7355c42678ce786b6f14d62b819be",
+    "metadataHash": "17e20325d04a75866ad2be38bd3398ae0fc3cfd4220efac9e5bb17e23e0444e6",
+    "license": {
+      "name": "MIT",
+      "verified": true,
+      "url": "https://github.com/cosscom/ui/blob/b2336c45f2b7355c42678ce786b6f14d62b819be/LICENSE",
+      "repository": "cosscom/ui",
+      "revision": "b2336c45f2b7355c42678ce786b6f14d62b819be",
+      "sha256": "c5fd4e7b2b9cc46c144299257369d50ad025fda76e7d731928c7301810c02227"
+    },
+    "tags": [
+      "feedback.notification"
+    ],
+    "dependencies": [
+      "@base-ui/react"
+    ],
+    "registryDependencies": [
+      "@coss/button"
+    ],
+    "portingEffort": "Medium \u2014 rewrite Tailwind classes, preserve behaviour, test token themes and density",
+    "rubric": {
+      "fit": 5,
+      "accessibility_evidence": 0,
+      "state_evidence": 2,
+      "dependency_cost": 5,
+      "portability": 5,
+      "licence": 5
+    },
+    "score": 0.8148148148148148,
+    "pattern": "toast",
+    "why": "Matches item-level feedback.notification; toast interaction provides a distinct pilot comparison. Static source shows 0/4 accessibility indicators and 2/3 state indicators; these are evidence hints, not a passed accessibility audit. Permissive repository licence verified at a pinned commit.",
+    "signals": [
+      {
+        "event": "action_invoked",
+        "possible": "Makes possible: explicit undo, retry or dismissal.",
+        "integration": "Bind visible actions to allowlisted semantic IDs and opportunity_summary; F01."
+      },
+      {
+        "event": "error_state",
+        "possible": "Makes possible: observable recovery after an error.",
+        "integration": "Connect retry to the actual operation outcome; F18. Dismissal does not establish satisfaction."
+      }
+    ],
+    "previews": {}
+  },
+  {
+    "id": "assistant-ui-elements-error-state",
+    "address": "@assistant-ui/elements-error-state",
+    "addressUrl": "https://r.assistant-ui.com/elements-error-state.json",
+    "registry": "@assistant-ui",
+    "name": "Error state",
+    "need": "Toast and inline feedback",
+    "wave": "pilot-01",
+    "version": "bb3bc8503196a122b31399cf878d13c8a4ac7dd0aeb5a9cd1bb477935a18e3bd",
+    "sourceRevision": "registry-sha256:bb3bc8503196a122b31399cf878d13c8a4ac7dd0aeb5a9cd1bb477935a18e3bd",
+    "repositoryRevision": "03c06506107f55a7bc11bed616a2fed06af8a8ba",
+    "metadataHash": "90d7096ac445827653048c40a1be9fe28488cc8fbf5df1ee09a1442b6273bbf4",
+    "license": {
+      "name": "MIT",
+      "verified": true,
+      "url": "https://github.com/assistant-ui/assistant-ui/blob/03c06506107f55a7bc11bed616a2fed06af8a8ba/LICENSE",
+      "repository": "assistant-ui/assistant-ui",
+      "revision": "03c06506107f55a7bc11bed616a2fed06af8a8ba",
+      "sha256": "eafb05991a572efa34097474b31fef45b14a8879ed1d1a8fd77de62e6fa7d275"
+    },
+    "tags": [
+      "layout.overlay",
+      "feedback.state",
+      "feedback.notification"
+    ],
+    "dependencies": [
+      "lucide-react"
+    ],
+    "registryDependencies": [
+      "https://r.assistant-ui.com/elements-surfaces.json"
+    ],
+    "portingEffort": "Low \u2014 rewrite Tailwind classes, preserve behaviour, test token themes and density",
+    "rubric": {
+      "fit": 5,
+      "accessibility_evidence": 1,
+      "state_evidence": 1,
+      "dependency_cost": 5,
+      "portability": 5,
+      "licence": 5
+    },
+    "score": 0.8148148148148148,
+    "pattern": "error",
+    "why": "Matches item-level layout.overlay, feedback.state, feedback.notification; error interaction provides a distinct pilot comparison. Static source shows 1/4 accessibility indicators and 1/3 state indicators; these are evidence hints, not a passed accessibility audit. Permissive repository licence verified at a pinned commit.",
+    "signals": [
+      {
+        "event": "action_invoked",
+        "possible": "Makes possible: explicit undo, retry or dismissal.",
+        "integration": "Bind visible actions to allowlisted semantic IDs and opportunity_summary; F01."
+      },
+      {
+        "event": "error_state",
+        "possible": "Makes possible: observable recovery after an error.",
+        "integration": "Connect retry to the actual operation outcome; F18. Dismissal does not establish satisfaction."
+      }
+    ],
+    "previews": {}
+  },
+  {
+    "id": "kibo-ui-banner",
+    "address": "@kibo-ui/banner",
+    "addressUrl": "https://www.kibo-ui.com/r/banner.json",
+    "registry": "@kibo-ui",
+    "name": "banner",
+    "need": "Toast and inline feedback",
+    "wave": "pilot-01",
+    "version": "77b8679e257a671211bd96b7ec39944e42e6f0fe8965e98ec8aeee26c33ddeab",
+    "sourceRevision": "registry-sha256:77b8679e257a671211bd96b7ec39944e42e6f0fe8965e98ec8aeee26c33ddeab",
+    "repositoryRevision": "3d63cdb15b79d972e3dc38a10997987672f9b263",
+    "metadataHash": "ab1bd755f49bcf2362bc8b0128b4abc109cbcdbb947e86371c8b2e2c39743765",
+    "license": {
+      "name": "MIT",
+      "verified": true,
+      "url": "https://github.com/shadcnblocks/kibo/blob/3d63cdb15b79d972e3dc38a10997987672f9b263/license.md",
+      "repository": "shadcnblocks/kibo",
+      "revision": "3d63cdb15b79d972e3dc38a10997987672f9b263",
+      "sha256": "1fe9198b595ddadef7e2d99e3e1698c036db61c81e91c7b42df90d59f563b2ba"
+    },
+    "tags": [
+      "feedback.notification"
+    ],
+    "dependencies": [
+      "@radix-ui/react-use-controllable-state",
+      "lucide-react"
+    ],
+    "registryDependencies": [
+      "button"
+    ],
+    "portingEffort": "Low \u2014 rewrite Tailwind classes, preserve behaviour, test token themes and density",
+    "rubric": {
+      "fit": 5,
+      "accessibility_evidence": 1,
+      "state_evidence": 0,
+      "dependency_cost": 4,
+      "portability": 5,
+      "licence": 5
+    },
+    "score": 0.7407407407407407,
+    "pattern": "banner",
+    "why": "Matches item-level feedback.notification; banner interaction provides a distinct pilot comparison. Static source shows 1/4 accessibility indicators and 0/3 state indicators; these are evidence hints, not a passed accessibility audit. Permissive repository licence verified at a pinned commit.",
+    "signals": [
+      {
+        "event": "action_invoked",
+        "possible": "Makes possible: explicit undo, retry or dismissal.",
+        "integration": "Bind visible actions to allowlisted semantic IDs and opportunity_summary; F01."
+      },
+      {
+        "event": "error_state",
+        "possible": "Makes possible: observable recovery after an error.",
+        "integration": "Connect retry to the actual operation outcome; F18. Dismissal does not establish satisfaction."
+      }
+    ],
+    "previews": {}
+  }
+]

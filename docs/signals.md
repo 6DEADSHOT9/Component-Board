@@ -1,0 +1,9 @@
+# Signal boundaries
+
+Each candidate says “makes possible” and names the integration required. The board does not collect these behaviour signals; it collects only names, email addresses, votes, optional reasons and adoption statuses. No third-party component JavaScript runs in the board browser: the previews are image/video files.
+
+Mappings use `../packages/contracts/observations.schema.json`, `../packages/contracts/features.json` and the 2026-11-18 signal decisions in `../docs/decisions.md`. The shortlist script verifies primary mapped event names exist in the contract. Expand/collapse uses `detail_changed`; source revisits use `object_opened`/`object_left`; copy/export uses `output_action`; table and chart changes use `collection_control_changed` or `representation_changed`; search uses the `search_*` episode events; prompt composition uses `composer_summary`, `draft_state`, and `message_revised`; attachments use `attachment_state`. Relevant `opportunity_summary` denominators and initial state must be wired too.
+
+A component only exposes an opportunity to instrument an action. A read-only file tree does not create attachment lifecycle events without an upload/submission integration; a chart without a switch does not emit representation choices. Neither a click, a dismissal, reading time nor repeated editing proves a preference or satisfaction.
+
+Typing samples and exact pause/key timing must be transient and summarized locally. Exclude password, OTP, secret/API-key and sensitive controls. No raw search query, clipboard content, filename, file path, URLs or document contents in analytics. Deleted wording is a separate local conversation-content store with a 30-day retention limit, scope/deletion controls and opt-in model-memory gates; it never goes in observations or PostHog. See the source decisions before implementing those flows.

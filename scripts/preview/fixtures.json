@@ -1,0 +1,157 @@
+{
+  "assistant-ui-elements-tool-call": {
+    "symbol": "ToolCall",
+    "jsx": "<C.ToolCall label=\"Searched project files\" activeLabel=\"Searching files\" query=\"design tokens\" request=\"Find shared colour tokens\" result=\"Found 12 matching definitions in appearance.json\" running={false} open={open} onOpenChange={setOpen}/>",
+    "action": {
+      "selector": "button"
+    }
+  },
+  "ai-elements-reasoning": {
+    "symbol": "Reasoning",
+    "jsx": "<C.Reasoning><C.ReasoningTrigger/><C.ReasoningContent>{\"Compare the available sources, check the constraints, then choose the smallest complete change.\"}</C.ReasoningContent></C.Reasoning>",
+    "action": {
+      "selector": "button"
+    }
+  },
+  "ai-elements-sources": {
+    "symbol": "Sources",
+    "jsx": "<C.Sources><C.SourcesTrigger count={3}/><C.SourcesContent><C.Source href=\"#\" title=\"Design foundations\"/><C.Source href=\"#\" title=\"Component adoption rules\"/><C.Source href=\"#\" title=\"Observation contract\"/></C.SourcesContent></C.Sources>",
+    "action": {
+      "selector": "button"
+    }
+  },
+  "elements-chat-input": {
+    "symbol": "AiChatInput",
+    "jsx": "<C.AiChatInput allowAttachments placeholder=\"Ask about the project\u2026\" onSubmit={()=>{}}/>",
+    "action": {
+      "selector": "textarea",
+      "fill": "Compare the component options and their dependencies."
+    }
+  },
+  "assistant-ui-elements-composer": {
+    "symbol": "Composer",
+    "jsx": "<C.Composer><C.ComposerBar><C.ComposerInput value={value} onChange={e=>setValue(e.target.value)} placeholder=\"Ask a question\u2026\"/><C.ComposerActions><C.ComposerSend disabled={!value} onClick={()=>setValue('')}/></C.ComposerActions></C.ComposerBar></C.Composer>",
+    "action": {
+      "selector": "input",
+      "fill": "Show the approved components for this project."
+    }
+  },
+  "ai-elements-prompt-input": {
+    "symbol": "PromptInput",
+    "jsx": "<C.PromptInput onSubmit={()=>{}}><C.PromptInputBody><C.PromptInputTextarea placeholder=\"What would you like to build?\"/></C.PromptInputBody><C.PromptInputFooter><C.PromptInputSubmit/></C.PromptInputFooter></C.PromptInput>",
+    "action": {
+      "selector": "textarea",
+      "fill": "Review the pilot shortlist and explain the trade-offs."
+    }
+  },
+  "assistant-ui-elements-terminal-block": {
+    "symbol": "TerminalBlock",
+    "jsx": "<C.TerminalBlock command=\"npm run build\" lines={[\"Building the component preview\u2026\",\"\u2713 24 components checked\",\"Build complete in 1.8 seconds\"]} visibleCount={3} done maxCollapsedLines={1}/>",
+    "action": {
+      "selector": "button[aria-expanded]"
+    }
+  },
+  "ai-elements-code-block": {
+    "symbol": "CodeBlock",
+    "jsx": "<C.CodeBlock code={\"const approved = components.filter(item => item.status === 'approved');\\nconsole.log(approved.length);\"} language=\"javascript\"><C.CodeBlockHeader><C.CodeBlockTitle>review.js</C.CodeBlockTitle><C.CodeBlockCopyButton/></C.CodeBlockHeader></C.CodeBlock>",
+    "action": {
+      "selector": "button"
+    }
+  },
+  "kibo-ui-code-block": {
+    "symbol": "CodeBlock",
+    "jsx": "<C.CodeBlock data={[{language:\"javascript\",filename:\"review.js\",code:\"const approved = items.filter(item => item.approved);\"}]} defaultValue=\"javascript\"><C.CodeBlockHeader><C.CodeBlockFilename value=\"javascript\">review.js</C.CodeBlockFilename><C.CodeBlockCopyButton/></C.CodeBlockHeader><C.CodeBlockBody>{item=><C.CodeBlockItem key={item.language} value={item.language}><C.CodeBlockContent language={item.language}>{item.code}</C.CodeBlockContent></C.CodeBlockItem>}</C.CodeBlockBody></C.CodeBlock>",
+    "action": {
+      "selector": "button"
+    }
+  },
+  "assistant-ui-elements-data-table": {
+    "symbol": "DataTable",
+    "jsx": "<C.DataTable caption=\"Pilot review\" columns={[{key:\"name\",label:\"Component\",sortable:true},{key:\"votes\",label:\"Reviews\",sortable:true,format:{kind:\"number\"}}]} rows={[{name:\"Prompt input\",votes:8},{name:\"Code block\",votes:12},{name:\"Data table\",votes:6}]} rowKey=\"name\"/>",
+    "action": {
+      "selector": "thead button"
+    }
+  },
+  "assistant-ui-elements-spec-sheet": {
+    "symbol": "SpecSheet",
+    "jsx": "<C.SpecSheet title=\"Component intake\" subtitle=\"Review snapshot\" visibleCount={4} rows={[{label:\"Licence\",value:\"MIT\",emphasis:true},{label:\"Dependencies\",value:\"3 packages\"},{label:\"Porting effort\",value:\"Medium\"},{label:\"Status\",value:\"Awaiting review\"}]}/>"
+  },
+  "kibo-ui-table": {
+    "symbol": "TableProvider",
+    "jsx": "<C.TableProvider columns={[{accessorKey:\"name\",header:({column})=><C.TableColumnHeader column={column} title=\"Component\"/>},{accessorKey:\"status\",header:\"Status\"}]} data={[{name:\"Prompt input\",status:\"Review\"},{name:\"Code block\",status:\"Approved\"},{name:\"Search\",status:\"Review\"}]}><C.TableHeader>{({headerGroup:hg})=><C.TableHeaderGroup headerGroup={hg} key={hg.id}>{({header})=><C.TableHead header={header} key={header.id}/>}</C.TableHeaderGroup>}</C.TableHeader><C.TableBody>{({row})=><C.TableRow row={row} key={row.id}>{({cell})=><C.TableCell cell={cell} key={cell.id}/>}</C.TableRow>}</C.TableBody></C.TableProvider>",
+    "action": {
+      "selector": "thead button"
+    }
+  },
+  "assistant-ui-elements-chart": {
+    "symbol": "Chart",
+    "jsx": "<C.Chart label=\"Components reviewed\" value=\"24\" delta=\"+8 this week\" points={[4,8,6,12,10,18,16,24]} visibleCount={8} variant=\"area\"/>"
+  },
+  "kibo-ui-contribution-graph": {
+    "symbol": "ContributionGraph",
+    "jsx": "<C.ContributionGraph data={Array.from({length:182},(_,i)=>({date:new Date(Date.UTC(2026,0,i+1)).toISOString().slice(0,10),count:i%5,level:i%5}))} maxLevel={4}><C.ContributionGraphCalendar>{({activity,dayIndex,weekIndex})=><C.ContributionGraphBlock activity={activity} dayIndex={dayIndex} weekIndex={weekIndex}/>}</C.ContributionGraphCalendar><C.ContributionGraphFooter><C.ContributionGraphTotalCount/><C.ContributionGraphLegend/></C.ContributionGraphFooter></C.ContributionGraph>"
+  },
+  "kibo-ui-gantt": {
+    "symbol": "GanttProvider",
+    "jsx": "<C.GanttProvider range=\"monthly\" zoom={100}><C.GanttSidebar><C.GanttSidebarGroup name=\"Pilot\"><C.GanttSidebarItem feature={{id:\"1\",name:\"Review components\",startAt:new Date(),endAt:new Date(Date.now()+7*86400000),status:{id:\"1\",name:\"In progress\",color:\"#3b82f6\"}}}/></C.GanttSidebarGroup></C.GanttSidebar><C.GanttTimeline><C.GanttHeader/><C.GanttFeatureList><C.GanttFeatureListGroup><C.GanttFeatureItem id=\"1\" name=\"Review components\" startAt={new Date()} endAt={new Date(Date.now()+7*86400000)} status={{id:\"1\",name:\"In progress\",color:\"#3b82f6\"}}/></C.GanttFeatureListGroup></C.GanttFeatureList><C.GanttToday/></C.GanttTimeline></C.GanttProvider>"
+  },
+  "ai-elements-file-tree": {
+    "symbol": "FileTree",
+    "jsx": "<C.FileTree><C.FileTreeFolder path=\"src\" name=\"src\"><C.FileTreeFile path=\"src/app.tsx\" name=\"app.tsx\"/><C.FileTreeFile path=\"src/style.css\" name=\"style.css\"/></C.FileTreeFolder><C.FileTreeFile path=\"README.md\" name=\"README.md\"/></C.FileTree>",
+    "action": {
+      "selector": "[role=\"treeitem\"] button,button"
+    }
+  },
+  "assistant-ui-elements-file-tree": {
+    "symbol": "FileTree",
+    "jsx": "<C.FileTree nodes={[{path:\"src\",name:\"src\",kind:\"folder\",depth:0},{path:\"src/app.tsx\",name:\"app.tsx\",kind:\"file\",depth:1,additions:24,deletions:3},{path:\"src/style.css\",name:\"style.css\",kind:\"file\",depth:1,additions:12,deletions:2}]} visibleCount={3} totalAdditions={36} totalDeletions={5}/>"
+  },
+  "kibo-ui-dropzone": {
+    "symbol": "Dropzone",
+    "jsx": "<C.Dropzone maxFiles={3}><C.DropzoneEmptyState/><C.DropzoneContent/></C.Dropzone>"
+  },
+  "assistant-ui-elements-command-palette": {
+    "symbol": "CommandPalette",
+    "jsx": "<C.CommandPalette commands={[{id:\"open\",label:\"Open component library\",group:\"Navigate\",keys:[\"\u2318\",\"K\"]},{id:\"review\",label:\"Review pilot\",group:\"Navigate\",keys:[\"R\"]},{id:\"export\",label:\"Export reviews\",group:\"Actions\",keys:[\"E\"]}]} query={value} activeId={active} onQueryChange={setValue} onActiveChange={setActive} onRun={()=>{}}/>",
+    "action": {
+      "selector": "input",
+      "fill": "review"
+    }
+  },
+  "diceui-command-stack": {
+    "symbol": "CommandStack",
+    "jsx": "<C.CommandStack><C.CommandStackInput placeholder=\"Search commands\u2026\"/><C.CommandStackList><C.CommandStackPage value=\"root\"><C.CommandStackGroup heading=\"Navigate\"><C.CommandStackItem value=\"library\">Component library</C.CommandStackItem><C.CommandStackItem value=\"review\">Review pilot</C.CommandStackItem></C.CommandStackGroup></C.CommandStackPage></C.CommandStackList></C.CommandStack>",
+    "action": {
+      "selector": "input",
+      "fill": "review"
+    }
+  },
+  "kibo-ui-combobox": {
+    "symbol": "Combobox",
+    "jsx": "<C.Combobox data={[{label:\"Prompt input\",value:\"prompt\"},{label:\"Data table\",value:\"table\"},{label:\"Code block\",value:\"code\"}]} type=\"component\"><C.ComboboxTrigger/><C.ComboboxContent><C.ComboboxInput/><C.ComboboxList><C.ComboboxEmpty/><C.ComboboxGroup>{item=><C.ComboboxItem key={item.value} value={item.value}>{item.label}</C.ComboboxItem>}</C.ComboboxGroup></C.ComboboxList></C.ComboboxContent></C.Combobox>",
+    "action": {
+      "selector": "button"
+    }
+  },
+  "coss-toast": {
+    "symbol": "ToastProvider",
+    "jsx": "<C.ToastProvider><button onClick={()=>C.toastManager.add({title:\"Review saved\",description:\"Your vote can be edited at any time.\"})} className=\"rounded-md border px-4 py-2\">Save review</button></C.ToastProvider>",
+    "action": {
+      "selector": "button"
+    }
+  },
+  "assistant-ui-elements-error-state": {
+    "symbol": "ErrorState",
+    "jsx": "<C.ErrorState title=\"Could not load the attachment\" detail=\"Check your connection, then try again.\" retrying={open} onRetry={()=>setOpen(true)}/>",
+    "action": {
+      "selector": "button"
+    }
+  },
+  "kibo-ui-banner": {
+    "symbol": "Banner",
+    "jsx": "<C.Banner inset><C.BannerTitle>The pilot is ready for your review.</C.BannerTitle><C.BannerAction onClick={()=>setOpen(true)}>Review components</C.BannerAction><C.BannerClose/></C.Banner>",
+    "action": {
+      "selector": "button"
+    }
+  }
+}

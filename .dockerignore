@@ -1,0 +1,7 @@
+.git
+.secrets
+.scratch
+node_modules
+.env
+__pycache__
+tests

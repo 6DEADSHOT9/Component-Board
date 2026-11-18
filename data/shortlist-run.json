@@ -1,0 +1,96 @@
+{
+  "stats": {
+    "records": 143254,
+    "gate_passed": 93663
+  },
+  "needs": {
+    "AI chat pieces": {
+      "tags": [
+        "ai.reasoning",
+        "ai.tool_activity",
+        "ai.sources_citations"
+      ],
+      "items": [
+        "@ai-elements/reasoning",
+        "@ai-elements/sources",
+        "@assistant-ui/elements-tool-call"
+      ]
+    },
+    "Prompt input": {
+      "tags": [
+        "input.text",
+        "ai.chat"
+      ],
+      "items": [
+        "@ai-elements/prompt-input",
+        "@assistant-ui/elements-composer",
+        "@elements/chat-input"
+      ]
+    },
+    "Code block": {
+      "tags": [
+        "content.code"
+      ],
+      "items": [
+        "@ai-elements/code-block",
+        "@kibo-ui/code-block",
+        "@assistant-ui/elements-terminal-block"
+      ]
+    },
+    "Data table": {
+      "tags": [
+        "data.table"
+      ],
+      "items": [
+        "@kibo-ui/table",
+        "@assistant-ui/elements-data-table",
+        "@assistant-ui/elements-spec-sheet"
+      ]
+    },
+    "Chart": {
+      "tags": [
+        "data.chart"
+      ],
+      "items": [
+        "@assistant-ui/elements-chart",
+        "@kibo-ui/contribution-graph",
+        "@kibo-ui/gantt"
+      ]
+    },
+    "Files and attachments": {
+      "tags": [
+        "files.browse",
+        "files.upload",
+        "files.document"
+      ],
+      "items": [
+        "@ai-elements/file-tree",
+        "@assistant-ui/elements-file-tree",
+        "@kibo-ui/dropzone"
+      ]
+    },
+    "Command palette and search": {
+      "tags": [
+        "data.search"
+      ],
+      "items": [
+        "@assistant-ui/elements-command-palette",
+        "@diceui/command-stack",
+        "@kibo-ui/combobox"
+      ]
+    },
+    "Toast and inline feedback": {
+      "tags": [
+        "feedback.notification",
+        "feedback.state"
+      ],
+      "items": [
+        "@coss/toast",
+        "@kibo-ui/banner",
+        "@assistant-ui/elements-error-state"
+      ]
+    }
+  },
+  "method": "Source-reviewed pilot pool (explicit addresses); 0.75 relevance - 0.25 max similarity; similarity = tags .35, dependencies .25, registry .20, interaction pattern .20; max 2 per registry per need. No popularity scores. Scores are static-source evidence, not verified runtime quality.",
+  "catalog_sha256": "see metadata hashes per candidate"
+}
